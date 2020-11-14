@@ -60,7 +60,7 @@ public class game_launcher extends Application
         b.setOnAction(event);
         r.getChildren().add(b);
         r.setAlignment(Pos.CENTER);
-        Scene s = new Scene(r, 300, 275);
+        Scene s = new Scene(r, 512, 800);
         stage.setTitle("Game Launcher");
             stage.setScene(s);
             stage.show();

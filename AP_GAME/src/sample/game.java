@@ -3,17 +3,21 @@ package sample;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -22,13 +26,23 @@ public class game {
 
     }
     public void start_game(Stage theStage){
-        theStage.setTitle( "Collect the Money Bags!" );
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().clear();
+        theStage.setTitle( "Color Switch" );
+        Group gp = new Group();
+        VBox ObstaclePanel = new VBox();
 
-        Canvas canvas = new Canvas( 512, 512 );
-        stackPane.getChildren().add( canvas );
-        Scene theScene =new Scene(stackPane,512,512);
+        ObstaclePanel.getChildren().add(new Obstacle());
+        ObstaclePanel.getChildren().add(new Obstacle());
+
+        Player_ball pb = new Player_ball();
+        gp.getChildren().addAll(ObstaclePanel,pb);
+
+        pb.setLayoutX(256);
+        pb.setLayoutY(600);
+        ObstaclePanel.setLayoutX(70);
+        for (Node nm: ObstaclePanel.getChildren()){
+         nm.setLayoutX(256);
+        }
+        Scene theScene =new Scene(gp,512,800);
         ArrayList<String> input = new ArrayList<String>();
         theStage.setScene(theScene);
         //theScene.setOnKeyPressed(
@@ -52,29 +66,9 @@ public class game {
                     }
                 });
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Font theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
-        gc.setFont( theFont );
-        gc.setFill( Color.GREEN );
-        gc.setStroke( Color.BLACK );
-        gc.setLineWidth(1);
 
-        Sprite briefcase = new Sprite();
-        briefcase.setImage("briefcase.png");
-        briefcase.setPosition(200, 200);
-        Point2D FORCE_GRAVITY = new Point2D(0,3);
-        ArrayList<Sprite> moneybagList = new ArrayList<Sprite>();
 
-        for (int i = 0; i < 15; i++)
-        {
-            Sprite moneybag = new Sprite();
-            moneybag.setImage("moneybag.png");
-            double px = 350 * Math.random() + 50;
-            double py = 350 * Math.random() + 50;
-            moneybag.setPosition(px,py);
-            moneybagList.add( moneybag );
-        }
 
 
 
@@ -89,43 +83,19 @@ public class game {
                 lastNanoTime = currentNanoTime;
 
                 // game logic
+                // acceleration below
 
-                briefcase.addVelocity(0,20);
-
-
+                pb.addVelocity(800*elapsedTime);
                 if (input.contains("SPACE")){
-                    briefcase.setVelocity(0,-500);
 
+                    pb.setVelocity(-500);
                 }
 
 
-                briefcase.update(elapsedTime);
                 input.clear();
+                pb.update(elapsedTime);
 
-                // collision detection
 
-                Iterator<Sprite> moneybagIter = moneybagList.iterator();
-                while ( moneybagIter.hasNext() )
-                {
-                    Sprite moneybag = moneybagIter.next();
-                    if ( briefcase.intersects(moneybag) )
-                    {
-                        moneybagIter.remove();
-                        score[0]++;
-                    }
-                }
-
-                // render
-
-                gc.clearRect(0, 0, 512,512);
-                briefcase.render( gc );
-
-                for (Sprite moneybag : moneybagList )
-                    moneybag.render( gc );
-
-                String pointsText = "Cash: $" + (100 * score[0]);
-                gc.fillText( pointsText, 360, 36 );
-                gc.strokeText( pointsText, 360, 36 );
             }
         }.start();
 
