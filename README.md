@@ -12,3 +12,7 @@ to-do
 4, Implement obstacles.
 5, Implement Obstacle generation.
 6, Implement Saving through Serialization.
+
+# For Static GUI <br>
+Add a static star<br>
+add a colour switcher <br>
