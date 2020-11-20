@@ -6,13 +6,14 @@ import javafx.scene.shape.Circle;
 public class Player_ball extends Circle {
     private double velocity;
     Player_ball(){
-        super(25, Color.GREEN);
+        super(17, Color.DARKCYAN);
         velocity = 0;
 
     }
     public void addVelocity(double v){
         velocity+=v;
     }
+    public double getVelocity(){return velocity;}
     public void setVelocity(double v){
         this.velocity = v;
     }

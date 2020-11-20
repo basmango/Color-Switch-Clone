@@ -1,84 +1,87 @@
 package sample;
 
-import java.awt.*;
+import java.util.LinkedList;
 
-import javafx.geometry.Pos;
+
 import javafx.scene.Group;
-import javafx.scene.Node;
-
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.shape.Shape;
 
-public  class Obstacle extends Group {
-
+public  class Obstacle {
+    private int angular_velocity = 5;
+    public Group shape_group = new Group();
+    private LinkedList<Shape> shapes = new LinkedList<Shape>();
+//    pritvate update_rotate(int time_elapsed){
+//    this.setRotate(angular_velocity*5);
+//
+//    }
+    public void assign_group (Pane x){
+        x.getChildren().add(0,shape_group);
+    }
     Obstacle(){
-        super();
 
-        Arc ar1 = create_arc(0,90, Color.BLUE);
-        Arc ar2 = create_arc(90,90,Color.YELLOW);
-        Arc ar3 = create_arc(180,90, Color.GREEN);
-        Arc ar4 = create_arc(270,90, Color.RED);
+//
+        shapes.add(add_arc(true,true,Color.DODGERBLUE));
+        shapes.add(add_arc(false,true,Color.PURPLE));
+        shapes.add(add_arc(true,false,Color.DARKCYAN));
+        shapes.add(add_arc(false,false,Color.ORANGE));
+          //add_arc(this,-1,1,Color.CYAN);
+       // add_arc(this,-1,-1,Color.YELLOW);
+        shape_group.getChildren().addAll(shapes);
+        shape_group.setTranslateX(105);
+        shape_group.setTranslateY(-200);
 
-//        this.getChildren().add(drawSemiRing(350, 350, 200, 30, Color.LIGHTSKYBLUE, Color.DARKBLUE));
-
-        this.getChildren().addAll(ar1,ar2,ar3,ar4);
-
-    }
-    private Arc create_arc(int offset,int len,Color cl){
-        Arc arc = new Arc(500,30,150,150,offset,len);
-
-        //Setting the properties of the arc
-
-        arc.setStrokeWidth(25);
-        arc.setStrokeType(StrokeType.CENTERED);
-        arc.setFill(javafx.scene.paint.Color.TRANSPARENT);
-        arc.setStroke(cl);
-        arc.setType(ArcType.OPEN);
-
-        return arc;
 
     }
-    private Path drawSemiRing(double centerX, double centerY, double radius, double innerRadius, Color bgColor, Color strkColor) {
-        Path path = new Path();
-        path.setFill(bgColor);
-        path.setStroke(strkColor);
-        path.setFillRule(FillRule.EVEN_ODD);
+    private Shape add_arc(boolean is_up, boolean is_right,Color c) {
 
-        MoveTo moveTo = new MoveTo();
-        moveTo.setX(centerX + innerRadius);
-        moveTo.setY(centerY);
+        //drawing circle
+        int x = 0;
+        int y = 0;
+        int r = 150;
+        Circle circle = new Circle();
+        circle.setCenterX(x);
+        circle.setCenterY(y);
+        circle.setRadius(r);
+        Circle c_in = new Circle();
+        c_in.setCenterX(x);
+        c_in.setCenterY(y);
+        c_in.setRadius(r - 25);
+        //TOP RIGHT ARC
+        Shape shape = Shape.subtract(circle, c_in);
+        Rectangle rec = new Rectangle(x, y, r, r);
+        Rectangle rec2 = new Rectangle(x - r, y, r, r);
+        Rectangle rec3 = new Rectangle(x - r, y - r, r, r);
+        Rectangle rec4 = new Rectangle(x, y - r, r, r);
 
-        ArcTo arcToInner = new ArcTo();
-        arcToInner.setX(centerX - innerRadius);
-        arcToInner.setY(centerY);
-        arcToInner.setRadiusX(innerRadius);
-        arcToInner.setRadiusY(innerRadius);
+        if (!is_right || is_up) shape = shape.subtract(shape, rec);
+        if (is_right || is_up) shape = shape.subtract(shape, rec2);
+        if (is_right || !is_up) shape = shape.subtract(shape, rec3);
+        if (!is_right || !is_up) shape = shape.subtract(shape, rec4);
+        shape.setFill(c);
 
-        MoveTo moveTo2 = new MoveTo();
-        moveTo2.setX(centerX + innerRadius);
-        moveTo2.setY(centerY);
+        return shape;
+        //TOP LEFT ARC
 
-        HLineTo hLineToRightLeg = new HLineTo();
-        hLineToRightLeg.setX(centerX + radius);
 
-        ArcTo arcTo = new ArcTo();
-        arcTo.setX(centerX - radius);
-        arcTo.setY(centerY);
-        arcTo.setRadiusX(radius);
-        arcTo.setRadiusY(radius);
+    }
+    public void move(double val){
+       this.shape_group.setTranslateY(this.shape_group.getTranslateY()+val);
+    }
 
-        HLineTo hLineToLeftLeg = new HLineTo();
-        hLineToLeftLeg.setX(centerX - innerRadius);
 
-        path.getElements().add(moveTo);
-        path.getElements().add(arcToInner);
-        path.getElements().add(moveTo2);
-        path.getElements().add(hLineToRightLeg);
-        path.getElements().add(arcTo);
-        path.getElements().add(hLineToLeftLeg);
+    public boolean check_collision(Player_ball p){
+       for(Shape s : this.shapes){
 
-        return path;
+           return Shape.intersect(p,s).getBoundsInLocal().getWidth()!=-1 && s.getFill()!=p.getFill();
+
+
+
+       }
+        return false;
     }
 
 
