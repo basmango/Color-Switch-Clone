@@ -16,6 +16,7 @@ to-do
 # For Static GUI <br>
 Add a static star<br>
 add a colour switcher <br>
+why the space bar? <br>
 
 ### can do for bonus <br>
 Modes <br>
