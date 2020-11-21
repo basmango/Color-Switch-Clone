@@ -118,6 +118,7 @@ public class game {
                     x.getTransforms().add(new Rotate(x.getRotate()+100*elapsedTime, 0, 0,0, Rotate.Z_AXIS));
 
                 }
+
                 while (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60){
                     apply_vel();
                 }
@@ -126,7 +127,6 @@ public class game {
                 }
                 else{
                     pb.addVelocity(1200*elapsedTime);
-
                 }
 
 
