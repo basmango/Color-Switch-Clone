@@ -2,89 +2,150 @@ package sample;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-
-import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import javafx.scene.shape.Arc;
-import javafx.scene.shape.ArcType;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class game {
     game(){
-
     }
-    Canvas art;
-    Canvas pause_canvas;
-    GraphicsContext gc;
-    VBox ObstaclePanel;
-    Player_ball pb;
+    LinkedList<Obstacle> obs;
+    private Scene theScene;
+    private ArrayList<String> input;
+    private Score_board score_board;
+    private Group gp;
+    private LinkedList<Screen_art> immobile_gui = new LinkedList<Screen_art>();
+
+    private LinkedList<ColorSwitcher> colorSwitchers = new LinkedList<ColorSwitcher>();
+    private LinkedList<Screen_art> mobile_gui = new LinkedList<Screen_art>();
+    private Start_art st_art;
+    private VBox ObstaclePanel;
+    private Player_ball pb;
     private double obs_vel = 0;
+
     public void start_game(Stage theStage){
-        theStage.setTitle( "Color Switch" );
-        Group gp = new Group();
-        art = new Canvas(500,600);
-        pause_canvas  = new Canvas(50,50);
-        Pause pause_button = new Pause(pause_canvas);
-        gc = art.getGraphicsContext2D();
-        Clip_art spacebar = new Clip_art();
-        spacebar.setPositionX(0);
-        spacebar.setPositionY(0);
-         ObstaclePanel = new VBox();
+        init_gui(theStage);
+        input = new ArrayList<String>();
+        new AnimationTimer()
+        {   long lastNanoTime =System.nanoTime();
+            public void handle(long currentNanoTime)
+            {
+                // calculate time since last update.
+                double elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
+                lastNanoTime = currentNanoTime;
 
-        ObstaclePanel.setSpacing(200);
-        LinkedList<Obstacle> obs= new LinkedList<Obstacle>();
-        obs.add(new Obstacle());
-        obs.add(new Obstacle());
+                //Rotation
 
-        for(Obstacle o: obs){
-            o.assign_group(ObstaclePanel);
-            o.shape_group.setTranslateY(-100);
+               animate_obs(elapsedTime);
+                while (at_60percent()){
+                    simulate_climb();
+                }
+                if(pb.getLayoutY()>=st_art.getPositionY()-50){
+                    pb.setVelocity(0);
+                    pb.setLayoutY(st_art.getPositionY()-50);
+                }
+                else{
+                    // acceleration below
+                    pb.addVelocity(2000*elapsedTime);
+                }
+                
+                if (input.contains("SPACE")){
+                        pb.setVelocity(-650);
+                }
+
+                check_collisions();
+                update_obs();
+                update_and_refresh(elapsedTime);
+            }
+        }.start();
+        theStage.show();
+    }
+    private void animate_obs(double elapsed_time){
+        for(Obstacle ob: obs ){
+            ob.motion(elapsed_time);
         }
+    }
+    private void check_collisions(){
+        for(Obstacle ob : obs){
+            ob.check_collision(pb);
+            ob.check_star_collision(pb,theScene,score_board);
+        }
+        for(ColorSwitcher cs : colorSwitchers){
+            if(cs.check_collision(pb,theScene)){
+                cs.action(pb,score_board);
+                cs.setDisabled();
+                colorSwitchers.remove(cs);
+                break;
+            }
+
+        }
+    }
+    private void update_obs(){
+        Obstacle ob;
+
+        ob = obs.getFirst();
+        if(at_0percent_obs(ob)){
+                obs.remove(ob);
+                ObstaclePanel.getChildren().remove(ob);
+            }
+            if(obs.size()<3){
+                addobs();
+            }
+         }
+    private void update_and_refresh(double elapsedTime){
+        input.clear();
+        pb.update(elapsedTime);
+        score_board.render();
+    }
+
+    private boolean at_0percent_obs(Obstacle ob){
+
+        return (ob.complete_group.localToScene(ob.complete_group.getBoundsInLocal()).getMaxY()>theScene.getHeight());
+    }
+    private boolean at_0percent(Player_ball pb){
+
+        return (pb.getBoundsInParent().getMaxY()>theScene.getHeight());
+    }
+    private boolean at_60percent(){
+    return (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60);
+    }
+    private void init_gui(Stage theStage){
+        theStage.setTitle( "Color Switch" );
+        gp = new Group();
+        st_art = new Start_art();
+        score_board = new Score_board();
+        Pause pause_button = new Pause();
+        this.mobile_gui.add(st_art);
+        this.immobile_gui.add(pause_button);
+
+        ObstaclePanel = new VBox();
+        ObstaclePanel.setSpacing(100);
+        obs= new LinkedList<Obstacle>();
         //ObstaclePanel.getChildren().add(art);
-         pb = new Player_ball();
-        gp.getChildren().addAll(art,ObstaclePanel,pb,pause_canvas);
-        art.setLayoutY(600);
-        art.setLayoutX(155);
+        pb = new Player_ball();
         pb.setLayoutX(256);
         pb.setLayoutY(500);
-        pause_canvas.setLayoutY(5);
-        pause_canvas.setLayoutX(457);
-        ObstaclePanel.setLayoutX(0);
+        gp.getChildren().addAll(ObstaclePanel,pb);
+        pause_button.addto(gp);
+        score_board.addto(gp);
+        st_art.addto(gp);
+        addobs();
+        addobs();
         for (Node nm: ObstaclePanel.getChildren()){
-         nm.setLayoutX(256);
-         nm.setTranslateY(-500);
+            nm.setLayoutX(256);
+            nm.setTranslateY(-600);
         }
+       theScene =new Scene(gp,512,800,Color.web("#242020"));
 
-        Scene theScene =new Scene(gp,512,800,Color.web("#242020"));
-
-
-        ArrayList<String> input = new ArrayList<String>();
         theStage.setScene(theScene);
-        //theScene.setOnKeyPressed(
-//            new EventHandler<KeyEvent>()
-//            {
-//                public void handle(KeyEvent e)
-//                {
-//                    String code = e.getCode().toString();
-//                    if ( !input.contains(code) )
-//                        input.add( code );
-//                }
-//            });
+
         theScene.setOnKeyReleased(
                 new EventHandler<KeyEvent>()
                 {
@@ -96,89 +157,50 @@ public class game {
                     }
                 });
 
-
-
-
-
-
-
-        int score[] = new int[1];
-
-        new AnimationTimer()
-        {long lastNanoTime =System.nanoTime();
-            public void handle(long currentNanoTime)
-            {
-                // calculate time since last update.
-                double elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
-                lastNanoTime = currentNanoTime;
-
-                // game logic
-                // acceleration below
-                for(Node x: ObstaclePanel.getChildren()){
-                    x.getTransforms().add(new Rotate(x.getRotate()+100*elapsedTime, 0, 0,0, Rotate.Z_AXIS));
-
-                }
-
-                while (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60){
-                    apply_vel();
-                }
-                if(pb.getLayoutY()>=art.getLayoutY()-50){pb.setVelocity(0);
-                pb.setLayoutY(art.getLayoutY()-50);
-                }
-                else{
-                    pb.addVelocity(1200*elapsedTime);
-                }
-
-
-                if(input.contains("UP")){
-                    Obstacle ob = new Obstacle();
-                    double max = 0;
-                    for(Node x: ObstaclePanel.getChildren()){
-                        x.setTranslateY(x.getTranslateY()-ob.shape_group.getBoundsInLocal().getHeight()-200);
-                        max = x.getTranslateY();
-                    }
-                    ob.assign_group(ObstaclePanel);
-                    ob.shape_group.setTranslateY(max);
-
-                }
-
-                pb.update(elapsedTime);
-
-
-                if (input.contains("SPACE")){
-
-
-                        pb.setVelocity(-340);
-
-
-
-
-                    double max = 0;
-
-
-
-                }
-                for(Obstacle ob : obs){
-                    ob.check_collision(pb);
-
-                }
-
-                input.clear();
-                pb.update(elapsedTime);
-                spacebar.render(gc);
-                pause_button.render();
-
-            }
-        }.start();
-
-        theStage.show();
+        for(Screen_art sc : immobile_gui) sc.render();
+        for(Screen_art sc: mobile_gui) sc.render();
     }
-    public void apply_vel(){
+    private void addcolorswitcher(){
+        ColorSwitcher cs = new ColorSwitcher();
+
+        colorSwitchers.add(cs);
+
+
+        addtoVbox(cs.gc.getCanvas());
+
+
+        cs.translateX(232);
+        cs.render();
+
+    }
+    private void addobs(){
+
+        Obstacle ob = new Obstacle();
+        obs.add(ob);
+        addtoVbox(ob.complete_group);
+        addcolorswitcher();
+        }
+    private void addtoVbox(Node addition){
+        double max = 0;
+        for(Node x: ObstaclePanel.getChildren()){
+            x.setTranslateY(x.getTranslateY()-addition.getBoundsInLocal().getHeight()-ObstaclePanel.getSpacing());
+            max = x.getTranslateY();
+        }
+        ObstaclePanel.getChildren().add(0,addition);
+        addition.setTranslateY(max);
+    }
+
+    private void simulate_climb(){
         for(Node x: ObstaclePanel.getChildren()){
             x.setTranslateY(x.getTranslateY()+2);
+        }
+
+        pb.setTranslateY(pb.getTranslateY()+2);
+        for(Screen_art sc: mobile_gui){
+            sc.translateY(2);
+            sc.render();
 
         }
-        pb.setTranslateY(pb.getTranslateY()+2);
-        art.setTranslateY(art.getTranslateY()+2);
+
     }
 }

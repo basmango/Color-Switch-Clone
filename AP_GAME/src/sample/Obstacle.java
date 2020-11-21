@@ -4,20 +4,20 @@ import java.util.LinkedList;
 
 
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
 
 public  class Obstacle {
     private int angular_velocity = 5;
+    public Group complete_group = new Group();
     public Group shape_group = new Group();
     private LinkedList<Shape> shapes = new LinkedList<Shape>();
-//    pritvate update_rotate(int time_elapsed){
-//    this.setRotate(angular_velocity*5);
-//
-//    }
+    private Star star;
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
@@ -29,10 +29,14 @@ public  class Obstacle {
         shapes.add(add_arc(true,false,Color.DARKCYAN));
         shapes.add(add_arc(false,false,Color.ORANGE));
           //add_arc(this,-1,1,Color.CYAN);
-       // add_arc(this,-1,-1,Color.YELLOW);
+       // add_arc(this,-1,-1,Color.YELLOW)
+        // ;
+        star = new Star();
         shape_group.getChildren().addAll(shapes);
-        shape_group.setTranslateX(105);
-        shape_group.setTranslateY(-200);
+        complete_group.getChildren().add(shape_group);
+        star.addto(complete_group);
+        complete_group.setTranslateX(105);
+        complete_group.setTranslateY(-200);
 
 
     }
@@ -67,6 +71,15 @@ public  class Obstacle {
         //TOP LEFT ARC
 
 
+    }
+    public void check_star_collision(Player_ball pb, Scene sc,Score_board score_board){
+        if(this.star.check_collision(pb,sc)){
+            this.star.action(pb,score_board);
+            this.star.setDisabled();
+                }
+    }
+    public void motion(double elapsedtime){
+        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
     }
     public void move(double val){
        this.shape_group.setTranslateY(this.shape_group.getTranslateY()+val);
