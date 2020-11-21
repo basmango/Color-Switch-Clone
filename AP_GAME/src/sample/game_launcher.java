@@ -35,44 +35,36 @@ public class game_launcher extends Application
 
     public void start(Stage theStage)
     {
-    try{
-        show_main_menu(theStage);
-    }
-    catch(Exception e ){
-        System.out.println(e.getMessage());
+        try{
+            show_main_menu(theStage);
+        }
+        catch(Exception e ){
+            System.out.println(e.getMessage());
 
-    }
+        }
     }
 
     public void show_main_menu(Stage stage) throws Exception{
-//        Parent gui;
-        StackPane r = new StackPane();
-        Button b = new Button("start game");
-
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                game g = new game();
-                g.start_game(stage);
-            }
-        };
-        b.setOnAction(event);
-        r.getChildren().add(b);
-        r.setAlignment(Pos.CENTER);
-        Scene s = new Scene(r, 512, 800);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        Parent root = (Parent)loader.load();
+        MainMenu controller = (MainMenu) loader.getController();
+        controller.setStage(stage);
+//        StackPane r = new StackPane();
+//        Button b = new Button("start game");
+//        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent actionEvent) {
+//                game g = new game();
+//                g.start_game(stage);
+//            }
+//        };
+//        b.setOnAction(event);
+//        r.getChildren().add(b);
+//        r.setAlignment(Pos.CENTER);
+        Scene s = new Scene(root, 512, 800);
         stage.setTitle("Game Launcher");
-            stage.setScene(s);
-            stage.show();
-
-
-
-
-//        Group g = new Group();
-//        Button b1 = new Button("start game");
-//        Button b2 = new Button("exit");
-//        g.getChildren().add(b1);
-//        g.getChildren().add(b2);
+        stage.setScene(s);
+        stage.show();
 
 
     }

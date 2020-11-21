@@ -2,43 +2,88 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Arc?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="384.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenu">
+<AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenu">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="384.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Group layoutX="53.0" layoutY="272.0" scaleX="1.2">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292929" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
+      <Group layoutX="209.0" layoutY="646.0" scaleX="2.2" scaleY="1.5">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1c6acf" height="30.0" onMouseClicked="#resumeMenu" stroke="BLACK" strokeType="INSIDE" width="94.0" />
-            <Text layoutX="35.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume Game" translateX="-27.0" translateY="4.0">
-               <font>
-                  <Font name="MT Extra" size="12.0" />
-               </font>
-            </Text>
+            <Text layoutX="36.0" layoutY="16.0" onMouseClicked="#resumeMenu" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume Game" translateX="-27.0" translateY="4.0" />
          </children>
       </Group>
-      <Group layoutX="100.0" layoutY="172.0" scaleX="0.7" scaleY="0.7">
+      <Group layoutX="253.0" layoutY="462.0" scaleX="0.7" scaleY="0.7">
          <children>
             <Circle fill="#585858" onMouseClicked="#playGame" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-            <Polygon fill="WHITE" layoutX="10.0" layoutY="10.0" points="-50.0, 40.0, 50.0, 40.0, 0.0, -60.0" rotate="90.0" scaleX="0.6" scaleY="0.6" scaleZ="0.7" stroke="TRANSPARENT" strokeType="INSIDE" translateX="-2.0" />
+            <Polygon fill="WHITE" layoutX="10.0" layoutY="10.0" onMouseClicked="#playGame" points="-50.0, 40.0, 50.0, 40.0, 0.0, -60.0" rotate="90.0" scaleX="0.6" scaleY="0.6" scaleZ="0.7" stroke="TRANSPARENT" strokeType="INSIDE" translateX="-2.0" />
          </children>
       </Group>
-      <Group layoutX="29.0" layoutY="29.0">
+      <Group layoutX="50.0" layoutY="50.0" scaleX="1.5" scaleY="1.5">
          <children>
             <Circle fill="#585858" onMouseClicked="#exitGame" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
             <Group layoutX="-15.0" layoutY="-79.0" scaleX="0.1" scaleY="0.1">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" rotate="-45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" rotate="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" onMouseClicked="#exitGame" rotate="-45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" onMouseClicked="#exitGame" rotate="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
                </children>
             </Group>
          </children>
       </Group>
-      <Text fill="WHITE" layoutX="59.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colour Switch" />
+      <Group fx:id="inner" layoutX="228.0" layoutY="465.0" scaleX="0.6" scaleY="0.6">
+         <children>
+            <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
+            <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="30.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
+         </children>
+      </Group>
+      <Group fx:id="middle" layoutX="230.0" layoutY="462.0" scaleX="0.9" scaleY="0.9">
+         <children>
+            <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="25.0" translateX="-30.0" />
+            <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="25.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="25.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="25.0" />
+         </children>
+      </Group>
+      <Group fx:id="outer" layoutX="231.0" layoutY="462.0" scaleX="1.2" scaleY="1.2">
+         <children>
+            <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="20.0" translateX="-30.0" />
+            <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="20.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="20.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="20.0" />
+         </children>
+      </Group>
+      <Text fill="WHITE" layoutX="91.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C    L    R">
+         <font>
+            <Font size="84.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="96.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SWITCH">
+         <font>
+            <Font size="90.0" />
+         </font>
+      </Text>
+      <Group fx:id="inner1" layoutX="164.0" layoutY="154.0" scaleX="0.3" scaleY="0.3">
+         <children>
+            <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
+            <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="30.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
+         </children>
+      </Group>
+      <Group fx:id="inner11" layoutX="298.0" layoutY="154.0" scaleX="0.3" scaleY="0.3">
+         <children>
+            <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
+            <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="30.0" />
+            <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
+         </children>
+      </Group>
    </children>
 </AnchorPane>
