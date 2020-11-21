@@ -55,7 +55,7 @@ public class game {
                     // acceleration below
                     pb.addVelocity(2000*elapsedTime);
                 }
-                
+
                 if (input.contains("SPACE")){
                         pb.setVelocity(-650);
                 }
@@ -107,7 +107,7 @@ public class game {
 
     private boolean at_0percent_obs(Obstacle ob){
 
-        return (ob.complete_group.localToScene(ob.complete_group.getBoundsInLocal()).getMaxY()>theScene.getHeight());
+        return (ob.complete_group.localToScene(ob.complete_group.getBoundsInLocal()).getMinY()>theScene.getHeight());
     }
     private boolean at_0percent(Player_ball pb){
 
