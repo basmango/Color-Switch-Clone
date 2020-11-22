@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 import static java.lang.Thread.sleep;
 
@@ -248,9 +249,17 @@ public class game {
 
     }
     private void addobs(){
-        Obstacle ob = new Obstacle();
-        obs.add(ob);
-        addtoVbox(ob.complete_group);
+        Random random = new Random();
+        switch(random.nextInt(2)){
+            case 0:Obstacle ob = new Obstacle();
+
+                obs.add(ob);
+                addtoVbox(ob.complete_group);
+                break;
+            case 1: small2circs s2 = new small2circs();
+                    obs.add(s2);
+                    addtoVbox(s2.complete_group);
+        }
         addcolorswitcher();
     }
     private void addtoVbox(Node addition){
