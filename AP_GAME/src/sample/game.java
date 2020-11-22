@@ -21,7 +21,12 @@ import java.util.LinkedList;
 import static java.lang.Thread.sleep;
 
 public class game {
-    game(){
+    private static game instance;
+    public game(){
+        instance = this;
+    }
+    public static game getInstance() {
+        return instance;
     }
     LinkedList<Obstacle> obs;
     Stage theStage;
@@ -38,6 +43,7 @@ public class game {
     private Player_ball pb;
     private double obs_vel = 0;
     private AnimationTimer an;
+    private boolean isPaused = false;
     public void start_game(Stage theStage){
         this.theStage = theStage;
         init_gui(theStage);
@@ -86,7 +92,6 @@ public class game {
                 }
                 if(pause_button.isClicked()){
                     pause_button.Clickcheckdone();
-
                     try {
                         pause_menu();
                         this.stop();
@@ -101,18 +106,26 @@ public class game {
         theStage.show();
     }
     private void pause_menu() throws IOException {
-    System.out.println("paused");
-    try{
-        sleep(1000);
+        isPaused = true;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseMenu.fxml"));
+        Parent root = (Parent)loader.load();
+        PauseMenu controller = (PauseMenu) loader.getController();
+        controller.setStage(theStage);
+        Scene s = new Scene(root, 512, 800);
+        theStage.setTitle("Pause Game");
+        theStage.setScene(s);
+        theStage.show();
+        try{
+            while(isPaused){
+                System.out.println("paused");
+            }
+        }
+        catch (Exception e){
+            System.out.print(e.getMessage());
+        }
     }
-    catch (Exception e){
-        System.out.print(e.getMessage());
-    }
-//        System.out.println("game continued");
-//        resume_game();
-    }
-    private void resume_game(){
-        gameloop();
+    public void resume_game(){
+        isPaused = false;
     }
     private void exit_menu() throws IOException {
 //        Stage stage = new Stage();
@@ -122,7 +135,7 @@ public class game {
         ExitMenu controller = (ExitMenu) loader.getController();
         controller.setStage(theStage);
         Scene s = new Scene(root, 512, 800);
-        theStage.setTitle("Resume Games");
+        theStage.setTitle("Exit Menu");
         theStage.setScene(s);
         theStage.show();
 //        System.out.println("test exec");
@@ -150,7 +163,6 @@ public class game {
     }
     private void update_obs(){
         Obstacle ob;
-
         ob = obs.getFirst();
         if(at_0percent_obs(ob)){
             obs.remove(ob);
