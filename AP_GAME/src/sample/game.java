@@ -21,6 +21,7 @@ public class game {
     game(){
     }
     LinkedList<Obstacle> obs;
+
     private Scene theScene;
     private ArrayList<String> input;
     private Score_board score_board;
@@ -35,6 +36,7 @@ public class game {
     private double obs_vel = 0;
 
     public void start_game(Stage theStage){
+
         init_gui(theStage);
         input = new ArrayList<String>();
         new AnimationTimer()
@@ -65,7 +67,8 @@ public class game {
                 }
                 if(at_0percent(pb)){
                     try {
-                        exit_menu(theStage);
+                        exit_menu();
+                        this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -75,10 +78,13 @@ public class game {
                 update_and_refresh(elapsedTime);
             }
         }.start();
+//        System.out.println("testend");
         theStage.show();
     }
 
-    private void exit_menu(Stage stage) throws IOException {
+    private void exit_menu() throws IOException {
+        Stage stage = new Stage();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
         Parent root = (Parent)loader.load();
         ExitMenu controller = (ExitMenu) loader.getController();
@@ -87,6 +93,7 @@ public class game {
         stage.setTitle("Resume Games");
         stage.setScene(s);
         stage.show();
+//        System.out.println("test exec");
     }
 
     private void animate_obs(double elapsed_time){
