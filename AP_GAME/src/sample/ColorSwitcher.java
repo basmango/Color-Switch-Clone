@@ -12,10 +12,10 @@ public class ColorSwitcher extends Collectible {
         this.init_canvas();
         this.setImage_primary("switcher.png",50,50);
         List<Color> colorList = new ArrayList<Color>();
-        colorList.add(Color.DODGERBLUE);
-        colorList.add(Color.PURPLE);
-        colorList.add(Color.DARKCYAN);
-        colorList.add(Color.ORANGE);
+        colorList.add(Color.web("0xFF0082"));
+        colorList.add(Color.web("0x8D13FA"));
+        colorList.add(Color.web("0x35E2F2"));
+        colorList.add(Color.web("0xF5DF0D"));
         Random rand = new Random();
         color  = colorList.get(rand.nextInt(colorList.size()));
     }

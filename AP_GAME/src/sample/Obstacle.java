@@ -24,10 +24,10 @@ public  class Obstacle {
     Obstacle(){
 
 //
-        shapes.add(add_arc(true,true,Color.DODGERBLUE));
-        shapes.add(add_arc(false,true,Color.PURPLE));
-        shapes.add(add_arc(true,false,Color.DARKCYAN));
-        shapes.add(add_arc(false,false,Color.ORANGE));
+        shapes.add(add_arc(true,true,Color.web("0xFF0082")));
+        shapes.add(add_arc(false,true,Color.web("0x8D13FA")));
+        shapes.add(add_arc(true,false,Color.web("0x35E2F2")));
+        shapes.add(add_arc(false,false,Color.web("0xF5DF0D")));
           //add_arc(this,-1,1,Color.CYAN);
        // add_arc(this,-1,-1,Color.YELLOW)
         // ;

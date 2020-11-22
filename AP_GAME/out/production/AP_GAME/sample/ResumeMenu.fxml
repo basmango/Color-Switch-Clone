@@ -24,7 +24,7 @@
                 </Group>
             </children>
         </Group>
-        <Text fill="WHITE" layoutX="81.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C    L    R">
+        <Text fill="WHITE" layoutX="81.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
             <font>
                 <Font name="Arial" size="84.0" />
             </font>
@@ -165,5 +165,15 @@
             <Image url="@../home.png" />
          </image>
       </ImageView>
+      <Text fill="WHITE" layoutX="235.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="369.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

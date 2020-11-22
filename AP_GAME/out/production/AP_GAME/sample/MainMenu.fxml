@@ -56,7 +56,7 @@
             <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="20.0" />
          </children>
       </Group>
-      <Text fill="WHITE" layoutX="78.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C    L    R">
+      <Text fill="WHITE" layoutX="78.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
          <font>
             <Font name="Arial" size="84.0" />
          </font>
@@ -110,5 +110,16 @@
             <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
          </children>
       </Group>
+      <Text fill="WHITE" layoutX="236.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="367.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
+       
    </children>
 </AnchorPane>

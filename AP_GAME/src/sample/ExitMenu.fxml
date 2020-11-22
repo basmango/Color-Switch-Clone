@@ -13,7 +13,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ExitMenu">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292929" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
-        <Text fill="WHITE" layoutX="81.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C    L    R">
+        <Text fill="WHITE" layoutX="81.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
             <font>
                 <Font name="Arial" size="84.0" />
             </font>
@@ -97,5 +97,29 @@
             </ImageView>
          </children>
       </Group>
+      <Text fill="WHITE" layoutX="236.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="371.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
+        <Group fx:id="save" layoutX="-25.0" layoutY="591.0" scaleX="0.5" scaleY="0.5">
+            <children>
+                <ImageView fitHeight="70.0" fitWidth="274.0" layoutX="-7.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../resume.png" />
+                    </image>
+                </ImageView>
+                <Text fill="WHITE" layoutX="84.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REVIVE">
+                    <font>
+                        <Font name="Arial" size="18.0" />
+                    </font>
+                </Text>
+            </children>
+        </Group>
     </children>
 </AnchorPane>
