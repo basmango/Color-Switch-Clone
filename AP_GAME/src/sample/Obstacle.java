@@ -67,6 +67,7 @@ public  class Obstacle {
         if (!is_right || !is_up) shape = shape.subtract(shape, rec4);
         shape.setFill(c);
 
+
         return shape;
         //TOP LEFT ARC
 
@@ -88,8 +89,8 @@ public  class Obstacle {
 
     public boolean check_collision(Player_ball p){
        for(Shape s : this.shapes){
-
-           return Shape.intersect(p,s).getBoundsInLocal().getWidth()!=-1 && s.getFill()!=p.getFill();
+             if(Shape.intersect(p,s).getBoundsInLocal().getWidth()!=-1 && !s.getFill().equals(p.getFill()))
+           return true;
 
 
 

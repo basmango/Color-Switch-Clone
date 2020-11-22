@@ -22,6 +22,7 @@ public class PauseMenu implements Initializable {
     @FXML
     private Group pause;
     private Stage stage;
+
     public void setStage(Stage stage){
         this.stage=stage;
     }

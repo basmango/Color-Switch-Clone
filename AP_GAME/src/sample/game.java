@@ -79,9 +79,16 @@ public class game {
                     pb.setVelocity(-650);
                 }
 
-                check_collisions();
                 update_obs();
                 update_and_refresh(elapsedTime);
+                if(check_collisions()){
+                    try {
+                        exit_menu();
+                        this.stop();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if(at_0percent(pb)){
                     try {
                         exit_menu();
@@ -115,17 +122,13 @@ public class game {
         theStage.setTitle("Pause Game");
         theStage.setScene(s);
         theStage.show();
-        try{
-            while(isPaused){
-                System.out.println("paused");
-            }
-        }
-        catch (Exception e){
-            System.out.print(e.getMessage());
-        }
+
+
     }
     public void resume_game(){
-        isPaused = false;
+        this.theStage.setScene(theScene);
+        gameloop();
+
     }
     private void exit_menu() throws IOException {
 //        Stage stage = new Stage();
@@ -146,9 +149,11 @@ public class game {
             ob.motion(elapsed_time);
         }
     }
-    private void check_collisions(){
+    private boolean check_collisions(){
         for(Obstacle ob : obs){
-            ob.check_collision(pb);
+            if(ob.check_collision(pb)){
+                return true;
+            }
             ob.check_star_collision(pb,theScene,score_board);
         }
         for(ColorSwitcher cs : colorSwitchers){
@@ -160,6 +165,7 @@ public class game {
             }
 
         }
+        return false;
     }
     private void update_obs(){
         Obstacle ob;
