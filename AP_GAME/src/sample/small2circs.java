@@ -43,7 +43,7 @@ public  class small2circs extends Obstacle{
        shape_group2.getChildren().addAll(shapes2);
         star = new Star();
         star.translateY(-120);
-        star.translateX(100);
+        star.translateX(120);
         shape_group.getChildren().addAll(shapes);
 //        shape_group2.setTranslateX(-300);
         shape_group2.setTranslateX(240);
