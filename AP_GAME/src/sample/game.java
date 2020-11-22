@@ -63,13 +63,13 @@ public class game {
                 if (input.contains("SPACE")){
                         pb.setVelocity(-650);
                 }
-                if(at_0percent(pb)){
-                    try {
-                        exit_menu(theStage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+//                if(at_0percent(pb)){
+//                    try {
+//                        exit_menu(theStage);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
                 check_collisions();
                 update_obs();
                 update_and_refresh(elapsedTime);
