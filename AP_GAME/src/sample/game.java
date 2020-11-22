@@ -21,6 +21,7 @@ public class game {
     game(){
     }
     LinkedList<Obstacle> obs;
+    Stage theStage;
     private Scene theScene;
     private ArrayList<String> input;
     private Score_board score_board;
@@ -35,6 +36,7 @@ public class game {
     private double obs_vel = 0;
 
     public void start_game(Stage theStage){
+        this.theStage = theStage;
         init_gui(theStage);
         input = new ArrayList<String>();
         new AnimationTimer()
@@ -47,7 +49,7 @@ public class game {
 
                 //Rotation
 
-               animate_obs(elapsedTime);
+                animate_obs(elapsedTime);
                 while (at_60percent()){
                     simulate_climb();
                 }
@@ -61,32 +63,38 @@ public class game {
                 }
 
                 if (input.contains("SPACE")){
-                        pb.setVelocity(-650);
+                    pb.setVelocity(-650);
                 }
-//                if(at_0percent(pb)){
-//                    try {
-//                        exit_menu(theStage);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
+
                 check_collisions();
                 update_obs();
                 update_and_refresh(elapsedTime);
+                if(at_0percent(pb)){
+                    try {
+                        exit_menu();
+                        this.stop();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }.start();
+//        System.out.println("testend");
         theStage.show();
     }
 
-    private void exit_menu(Stage stage) throws IOException {
+    private void exit_menu() throws IOException {
+//        Stage stage = new Stage();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
         Parent root = (Parent)loader.load();
         ExitMenu controller = (ExitMenu) loader.getController();
-        controller.setStage(stage);
+        controller.setStage(theStage);
         Scene s = new Scene(root, 512, 800);
-        stage.setTitle("Resume Games");
-        stage.setScene(s);
-        stage.show();
+        theStage.setTitle("Resume Games");
+        theStage.setScene(s);
+        theStage.show();
+//        System.out.println("test exec");
     }
 
     private void animate_obs(double elapsed_time){
@@ -114,13 +122,13 @@ public class game {
 
         ob = obs.getFirst();
         if(at_0percent_obs(ob)){
-                obs.remove(ob);
-                ObstaclePanel.getChildren().remove(ob);
-            }
-            if(obs.size()<3){
-                addobs();
-            }
-         }
+            obs.remove(ob);
+            ObstaclePanel.getChildren().remove(ob);
+        }
+        if(obs.size()<3){
+            addobs();
+        }
+    }
     private void update_and_refresh(double elapsedTime){
         input.clear();
         pb.update(elapsedTime);
@@ -136,7 +144,7 @@ public class game {
         return (pb.getBoundsInParent().getMaxY()>theScene.getHeight());
     }
     private boolean at_60percent(){
-    return (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60);
+        return (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60);
     }
     private void init_gui(Stage theStage){
         theStage.setTitle( "Color Switch" );
@@ -164,7 +172,7 @@ public class game {
             nm.setLayoutX(256);
             nm.setTranslateY(-600);
         }
-       theScene =new Scene(gp,512,800,Color.web("#242020"));
+        theScene =new Scene(gp,512,800,Color.web("#242020"));
 
         theStage.setScene(theScene);
 
@@ -195,7 +203,7 @@ public class game {
         obs.add(ob);
         addtoVbox(ob.complete_group);
         addcolorswitcher();
-        }
+    }
     private void addtoVbox(Node addition){
         double max = 0;
         for(Node x: ObstaclePanel.getChildren()){
