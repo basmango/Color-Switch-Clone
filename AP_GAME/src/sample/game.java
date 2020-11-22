@@ -14,8 +14,11 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import static java.lang.Thread.sleep;
 
 public class game {
     game(){
@@ -27,18 +30,22 @@ public class game {
     private Score_board score_board;
     private Group gp;
     private LinkedList<Screen_art> immobile_gui = new LinkedList<Screen_art>();
-
+    private  Pause pause_button;
     private LinkedList<ColorSwitcher> colorSwitchers = new LinkedList<ColorSwitcher>();
     private LinkedList<Screen_art> mobile_gui = new LinkedList<Screen_art>();
     private Start_art st_art;
     private VBox ObstaclePanel;
     private Player_ball pb;
     private double obs_vel = 0;
-
+    private AnimationTimer an;
     public void start_game(Stage theStage){
         this.theStage = theStage;
         init_gui(theStage);
+        gameloop();
+    }
+    private void gameloop(){
         input = new ArrayList<String>();
+
         new AnimationTimer()
         {   long lastNanoTime =System.nanoTime();
             public void handle(long currentNanoTime)
@@ -77,12 +84,36 @@ public class game {
                         e.printStackTrace();
                     }
                 }
+                if(pause_button.isClicked()){
+                    pause_button.Clickcheckdone();
+
+                    try {
+                        pause_menu();
+                        this.stop();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         }.start();
 //        System.out.println("testend");
         theStage.show();
     }
-
+    private void pause_menu() throws IOException {
+    System.out.println("paused");
+    try{
+        sleep(1000);
+    }
+    catch (Exception e){
+        System.out.print(e.getMessage());
+    }
+//        System.out.println("game continued");
+//        resume_game();
+    }
+    private void resume_game(){
+        gameloop();
+    }
     private void exit_menu() throws IOException {
 //        Stage stage = new Stage();
 
@@ -151,7 +182,7 @@ public class game {
         gp = new Group();
         st_art = new Start_art();
         score_board = new Score_board();
-        Pause pause_button = new Pause();
+       pause_button = new Pause();
         this.mobile_gui.add(st_art);
         this.immobile_gui.add(pause_button);
 
