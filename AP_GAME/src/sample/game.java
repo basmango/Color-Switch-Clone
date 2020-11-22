@@ -21,7 +21,7 @@ public class game {
     game(){
     }
     LinkedList<Obstacle> obs;
-
+    Stage theStage;
     private Scene theScene;
     private ArrayList<String> input;
     private Score_board score_board;
@@ -36,7 +36,7 @@ public class game {
     private double obs_vel = 0;
 
     public void start_game(Stage theStage){
-
+        this.theStage = theStage;
         init_gui(theStage);
         input = new ArrayList<String>();
         new AnimationTimer()
@@ -65,6 +65,10 @@ public class game {
                 if (input.contains("SPACE")){
                         pb.setVelocity(-650);
                 }
+
+                check_collisions();
+                update_obs();
+                update_and_refresh(elapsedTime);
                 if(at_0percent(pb)){
                     try {
                         exit_menu();
@@ -73,9 +77,6 @@ public class game {
                         e.printStackTrace();
                     }
                 }
-                check_collisions();
-                update_obs();
-                update_and_refresh(elapsedTime);
             }
         }.start();
 //        System.out.println("testend");
@@ -83,16 +84,16 @@ public class game {
     }
 
     private void exit_menu() throws IOException {
-        Stage stage = new Stage();
+//        Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
         Parent root = (Parent)loader.load();
         ExitMenu controller = (ExitMenu) loader.getController();
-        controller.setStage(stage);
+        controller.setStage(theStage);
         Scene s = new Scene(root, 512, 800);
-        stage.setTitle("Resume Games");
-        stage.setScene(s);
-        stage.show();
+        theStage.setTitle("Resume Games");
+        theStage.setScene(s);
+        theStage.show();
 //        System.out.println("test exec");
     }
 
