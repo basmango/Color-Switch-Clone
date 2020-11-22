@@ -17,7 +17,7 @@ public class Score_board extends Screen_art
         this.translateY(2);
         gc.setStroke(Color.WHITE);
         gc.setFill(Color.WHITE);
-        gc.setFont(new Font(" Noto Sans Math",50));
+        gc.setFont(new Font("System",50));
 
 
     }

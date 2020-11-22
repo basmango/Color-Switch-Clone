@@ -2,14 +2,18 @@ package sample;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -59,7 +63,13 @@ public class game {
                 if (input.contains("SPACE")){
                         pb.setVelocity(-650);
                 }
-
+                if(at_0percent(pb)){
+                    try {
+                        exit_menu(theStage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 check_collisions();
                 update_obs();
                 update_and_refresh(elapsedTime);
@@ -67,6 +77,18 @@ public class game {
         }.start();
         theStage.show();
     }
+
+    private void exit_menu(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
+        Parent root = (Parent)loader.load();
+        ExitMenu controller = (ExitMenu) loader.getController();
+        controller.setStage(stage);
+        Scene s = new Scene(root, 512, 800);
+        stage.setTitle("Resume Games");
+        stage.setScene(s);
+        stage.show();
+    }
+
     private void animate_obs(double elapsed_time){
         for(Obstacle ob: obs ){
             ob.motion(elapsed_time);
@@ -162,19 +184,13 @@ public class game {
     }
     private void addcolorswitcher(){
         ColorSwitcher cs = new ColorSwitcher();
-
         colorSwitchers.add(cs);
-
-
         addtoVbox(cs.gc.getCanvas());
-
-
         cs.translateX(232);
         cs.render();
 
     }
     private void addobs(){
-
         Obstacle ob = new Obstacle();
         obs.add(ob);
         addtoVbox(ob.complete_group);
@@ -199,7 +215,6 @@ public class game {
         for(Screen_art sc: mobile_gui){
             sc.translateY(2);
             sc.render();
-
         }
 
     }

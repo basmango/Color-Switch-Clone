@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.ExitMenu"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ExitMenu">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292929" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
+        <Group layoutX="46.0" layoutY="52.0" scaleX="1.5" scaleY="1.5" />
+        <Group fx:id="inner11" layoutX="299.0" layoutY="118.0" scaleX="0.3" scaleY="0.3" />
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="123.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <Text fill="WHITE" layoutX="122.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="99.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="147.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="362.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <Text fill="WHITE" layoutX="369.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="338.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="386.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="123.0" layoutY="622.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <Text fill="WHITE" layoutX="116.0" layoutY="673.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="99.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="147.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+            <image>
+                <Image url="@../star.png" />
+            </image>
+        </ImageView>
+        <Group layoutX="461.0" layoutY="52.0" />
+        <Circle fill="#585858" layoutX="51.0" layoutY="52.0" onMouseClicked="#mainMenu" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+        <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="37.0" layoutY="37.0" onMouseClicked="#mainMenu" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../home.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

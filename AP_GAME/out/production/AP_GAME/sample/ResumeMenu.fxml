@@ -158,5 +158,12 @@
             <Image url="@../star.png" />
          </image>
       </ImageView>
+      <Group layoutX="461.0" layoutY="52.0" />
+      <Circle fill="#585858" layoutX="460.0" layoutY="52.0" onMouseClicked="#mainMenu" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="446.0" layoutY="37.0" onMouseClicked="#mainMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../home.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
