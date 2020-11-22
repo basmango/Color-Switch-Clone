@@ -32,12 +32,17 @@ public  class Obstacle {
        // add_arc(this,-1,-1,Color.YELLOW)
         // ;
         star = new Star();
+
         shape_group.getChildren().addAll(shapes);
         complete_group.getChildren().add(shape_group);
+
         star.addto(complete_group);
         complete_group.setTranslateX(105);
         complete_group.setTranslateY(-200);
 
+
+    }
+    private void init(){
 
     }
     private Shape add_arc(boolean is_up, boolean is_right,Color c) {

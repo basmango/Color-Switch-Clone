@@ -15,7 +15,7 @@ import javafx.scene.transform.Rotate;
 
 public  class small2circs extends Obstacle{
     private int angular_velocity = 5;
-    public Group complete_group = new Group();
+
     public Group shape_group = new Group();
     public Group shape_group2 = new Group();
     private LinkedList<Shape> shapes = new LinkedList<Shape>();
@@ -27,15 +27,15 @@ public  class small2circs extends Obstacle{
     small2circs(){
 
 //
-        shapes.add(add_arc(true,true,Color.DODGERBLUE));
-        shapes.add(add_arc(false,true,Color.PURPLE));
-        shapes.add(add_arc(true,false,Color.DARKCYAN));
-        shapes.add(add_arc(false,false,Color.ORANGE));
+        shapes.add(add_arc(true,true,Color.web("0xFF0082")));
+        shapes.add(add_arc(false,true,Color.web("0x8D13FA")));
+        shapes.add(add_arc(true,false,Color.web("0x35E2F2")));
+        shapes.add(add_arc(false,false,Color.web("0xF5DF0D")));
 
-        shapes2.add(add_arc(true,false,Color.DODGERBLUE));
-        shapes2.add(add_arc(false,false,Color.PURPLE));
-        shapes2.add(add_arc(true,true,Color.DARKCYAN));
-        shapes2.add(add_arc(false,true,Color.ORANGE));
+        shapes2.add(add_arc(true,false,Color.web("0xFF0082")));
+        shapes2.add(add_arc(false,false,Color.web("0x8D13FA")));
+        shapes2.add(add_arc(true,true,Color.web("0x35E2F2")));
+        shapes2.add(add_arc(false,true,Color.web("0xF5DF0D")));
 
         //add_arc(this,-1,1,Color.CYAN);
         // add_arc(this,-1,-1,Color.YELLOW)
@@ -43,14 +43,15 @@ public  class small2circs extends Obstacle{
        shape_group2.getChildren().addAll(shapes2);
         star = new Star();
         star.translateY(-120);
-        star.translateX(120);
+        star.translateX(110);
         shape_group.getChildren().addAll(shapes);
 //        shape_group2.setTranslateX(-300);
-        shape_group2.setTranslateX(240);
+        shape_group2.setTranslateX(215);
+        complete_group.getChildren().clear();
         shapes.addAll(shapes2);
         complete_group.getChildren().addAll(shape_group,shape_group2);
         star.addto(complete_group);
-        complete_group.setTranslateX(15);
+        complete_group.setTranslateX(45);
         complete_group.setTranslateY(-200);
 
 
@@ -60,7 +61,7 @@ public  class small2circs extends Obstacle{
         //drawing circle
         int x = 0;
         int y = 0;
-        int r = 120;
+        int r = 107;
         Circle circle = new Circle();
         circle.setCenterX(x);
         circle.setCenterY(y);
@@ -68,7 +69,7 @@ public  class small2circs extends Obstacle{
         Circle c_in = new Circle();
         c_in.setCenterX(x);
         c_in.setCenterY(y);
-        c_in.setRadius(r - 15);
+        c_in.setRadius(r - 20);
         //TOP RIGHT ARC
         Shape shape = Shape.subtract(circle, c_in);
         Rectangle rec = new Rectangle(x, y, r, r);

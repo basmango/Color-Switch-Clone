@@ -174,8 +174,10 @@ public class game {
         if(at_0percent_obs(ob)){
             obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
+        System.out.println("test");
         }
-        if(obs.size()<3){
+
+        while(obs.size()<3){
             addobs();
         }
     }
