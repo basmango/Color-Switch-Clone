@@ -153,13 +153,13 @@ public class game {
 
         ob = obs.getFirst();
         if(at_0percent_obs(ob)){
-                obs.remove(ob);
-                ObstaclePanel.getChildren().remove(ob);
-            }
-            if(obs.size()<3){
-                addobs();
-            }
-         }
+            obs.remove(ob);
+            ObstaclePanel.getChildren().remove(ob);
+        }
+        if(obs.size()<3){
+            addobs();
+        }
+    }
     private void update_and_refresh(double elapsedTime){
         input.clear();
         pb.update(elapsedTime);
@@ -175,7 +175,7 @@ public class game {
         return (pb.getBoundsInParent().getMaxY()>theScene.getHeight());
     }
     private boolean at_60percent(){
-    return (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60);
+        return (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60);
     }
     private void init_gui(Stage theStage){
         theStage.setTitle( "Color Switch" );
@@ -203,7 +203,7 @@ public class game {
             nm.setLayoutX(256);
             nm.setTranslateY(-600);
         }
-       theScene =new Scene(gp,512,800,Color.web("#242020"));
+        theScene =new Scene(gp,512,800,Color.web("#242020"));
 
         theStage.setScene(theScene);
 
@@ -234,7 +234,7 @@ public class game {
         obs.add(ob);
         addtoVbox(ob.complete_group);
         addcolorswitcher();
-        }
+    }
     private void addtoVbox(Node addition){
         double max = 0;
         for(Node x: ObstaclePanel.getChildren()){
