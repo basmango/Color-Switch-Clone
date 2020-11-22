@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenu implements Initializable {
+    @FXML
+    private Group arrow;
+    @FXML
+    private Group resume;
     @FXML
     private Group inner;
     @FXML
@@ -55,14 +61,22 @@ public class MainMenu implements Initializable {
     }
     private void setRotate(Group p, int angle){
         RotateTransition rt = new RotateTransition(Duration.seconds(4),p);
-//        rt.setOnFinished(null);
         rt.setFromAngle(0);
         rt.setToAngle(angle);
         rt.setCycleCount(Timeline.INDEFINITE);
+        rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
-//        rt.setOnFinished((ActionEvent event) -> rt.play());
     }
-
+    private static void makeScaleTransition(Group p) {
+        ScaleTransition st = new ScaleTransition(Duration.seconds(1),p);
+        st.setFromX(1);
+        st.setFromY(1);
+        st.setToX(0.8);
+        st.setToY(0.8);
+        st.setCycleCount(Timeline.INDEFINITE);
+        st.setAutoReverse(true);
+        st.play();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setRotate(inner, 360);
@@ -70,5 +84,6 @@ public class MainMenu implements Initializable {
         setRotate(outer, 360);
         setRotate(inner1, 360);
         setRotate(inner11, -360);
+        makeScaleTransition(resume);
     }
 }

@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ public class ResumeMenu implements Initializable {
         rt.setFromAngle(0);
         rt.setToAngle(angle);
         rt.setCycleCount(Timeline.INDEFINITE);
+        rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
     }
     @Override
