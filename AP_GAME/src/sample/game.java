@@ -256,8 +256,8 @@ public class game {
     }
     private void addobs(){
         Random random = new Random();
-        switch(random.nextInt(2)){
-            case 0:Obstacle ob = new Obstacle();
+        switch(random.nextInt(3)){
+            case 0:Obstacle ob = new Circle_ob();
 
                 obs.add(ob);
                 addtoVbox(ob.complete_group);
@@ -265,6 +265,10 @@ public class game {
             case 1: small2circs s2 = new small2circs();
                     obs.add(s2);
                     addtoVbox(s2.complete_group);
+                    break;
+            case 2: concurrent_circles s3 = new concurrent_circles();
+                obs.add(s3);
+                addtoVbox(s3.complete_group);
         }
         addcolorswitcher();
     }

@@ -12,45 +12,23 @@ import javafx.scene.shape.*;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
-public  class Obstacle {
+public  abstract class Obstacle {
     private int angular_velocity = 5;
     public Group complete_group = new Group();
     public Group shape_group = new Group();
-    private LinkedList<Shape> shapes = new LinkedList<Shape>();
-    private Star star;
+    protected LinkedList<Shape> shapes = new LinkedList<Shape>();
+    protected Star star;
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
-    Obstacle(){
-
-//
-        shapes.add(add_arc(true,true,Color.web("0xFF0082")));
-        shapes.add(add_arc(false,true,Color.web("0x8D13FA")));
-        shapes.add(add_arc(true,false,Color.web("0x35E2F2")));
-        shapes.add(add_arc(false,false,Color.web("0xF5DF0D")));
-          //add_arc(this,-1,1,Color.CYAN);
-       // add_arc(this,-1,-1,Color.YELLOW)
-        // ;
-        star = new Star();
-
-        shape_group.getChildren().addAll(shapes);
-        complete_group.getChildren().add(shape_group);
-
-        star.addto(complete_group);
-        complete_group.setTranslateX(105);
-        complete_group.setTranslateY(-200);
 
 
-    }
-    private void init(){
-
-    }
-    private Shape add_arc(boolean is_up, boolean is_right,Color c) {
+    protected  Shape add_arc(int out,int in,boolean is_up, boolean is_right,Color c) {
 
         //drawing circle
         int x = 0;
         int y = 0;
-        int r = 150;
+        int r = out;
         Circle circle = new Circle();
         circle.setCenterX(x);
         circle.setCenterY(y);
@@ -58,7 +36,7 @@ public  class Obstacle {
         Circle c_in = new Circle();
         c_in.setCenterX(x);
         c_in.setCenterY(y);
-        c_in.setRadius(r - 25);
+        c_in.setRadius(in);
         //TOP RIGHT ARC
         Shape shape = Shape.subtract(circle, c_in);
         Rectangle rec = new Rectangle(x, y, r, r);
@@ -84,24 +62,10 @@ public  class Obstacle {
             this.star.setDisabled();
                 }
     }
-    public void motion(double elapsedtime){
-        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
-    }
-    public void move(double val){
-       this.shape_group.setTranslateY(this.shape_group.getTranslateY()+val);
-    }
+    public abstract  void motion(double elapsedtime);
 
 
-    public boolean check_collision(Player_ball p){
-       for(Shape s : this.shapes){
-             if(Shape.intersect(p,s).getBoundsInLocal().getWidth()!=-1 && !s.getFill().equals(p.getFill()))
-           return true;
-
-
-
-       }
-        return false;
-    }
+    public abstract boolean check_collision(Player_ball p);
 
 
 
