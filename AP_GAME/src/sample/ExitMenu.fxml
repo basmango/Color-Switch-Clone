@@ -44,7 +44,7 @@
                 <Image url="@../star.png" />
             </image>
         </ImageView>
-        <Text fill="#f2ed6e" layoutX="76.0" layoutY="604.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18">
+        <Text fx:id="collected" fill="#f2ed6e" layoutX="76.0" layoutY="604.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18">
             <font>
                 <Font name="Arial" size="30.0" />
             </font>
@@ -71,7 +71,7 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="244.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+      <Text fx:id="score" fill="WHITE" layoutX="244.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
          <font>
             <Font name="Arial" size="40.0" />
          </font>
@@ -82,7 +82,7 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="233.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15">
+      <Text fx:id="best_score" fill="WHITE" layoutX="233.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15">
          <font>
             <Font name="Arial" size="40.0" />
          </font>

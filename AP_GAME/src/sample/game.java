@@ -45,6 +45,10 @@ public class game {
     private double obs_vel = 0;
     private AnimationTimer an;
     private boolean isPaused = false;
+    public Score_board getScore_board() {
+        return score_board;
+    }
+
     public void start_game(Stage theStage){
         this.theStage = theStage;
         init_gui(theStage);
