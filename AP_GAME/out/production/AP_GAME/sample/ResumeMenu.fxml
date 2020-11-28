@@ -73,7 +73,7 @@
             <Image url="@../star.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="122.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15">
+      <Text fill="#f2ed6e" layoutX="111.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
          <font>
             <Font name="Arial" size="25.0" />
          </font>
@@ -103,7 +103,7 @@
             <Image url="@../star.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="369.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+      <Text fill="#f2ed6e" layoutX="345.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="59.5859375">
          <font>
             <Font name="Arial" size="25.0" />
          </font>
@@ -143,7 +143,7 @@
             <Image url="@../star.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="116.0" layoutY="673.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123">
+      <Text fill="#f2ed6e" layoutX="106.0" layoutY="678.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123" textAlignment="CENTER" wrappingWidth="60.662109375">
          <font>
             <Font name="Arial" size="25.0" />
          </font>

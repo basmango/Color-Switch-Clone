@@ -44,7 +44,7 @@
                 <Image url="@../star.png" />
             </image>
         </ImageView>
-        <Text fx:id="collected" fill="#f2ed6e" layoutX="76.0" layoutY="604.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18">
+        <Text fx:id="collected" fill="#f2ed6e" layoutX="62.0" layoutY="604.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" textAlignment="CENTER" wrappingWidth="60.662109374999886">
             <font>
                 <Font name="Arial" size="30.0" />
             </font>
@@ -71,7 +71,7 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="score" fill="WHITE" layoutX="244.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+      <Text fx:id="score" fill="WHITE" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="512.0">
          <font>
             <Font name="Arial" size="40.0" />
          </font>
@@ -82,15 +82,15 @@
             <Font name="Arial" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="best_score" fill="WHITE" layoutX="233.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15">
+      <Text fx:id="best_score" fill="WHITE" layoutX="-1.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="512.0">
          <font>
             <Font name="Arial" size="40.0" />
          </font>
       </Text>
-      <Group fx:id="replay" layoutX="162.0" layoutY="533.0">
+      <Group fx:id="replay" layoutX="162.0" layoutY="533.0" onMouseClicked="#startGame">
          <children>
-            <Circle fill="#585858" layoutX="96.0" layoutY="77.0" onMouseClicked="#mainMenu" radius="80.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-            <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="38.0" layoutY="17.0" onMouseClicked="#mainMenu" pickOnBounds="true" preserveRatio="true" rotate="-60.0">
+            <Circle fill="#585858" layoutX="96.0" layoutY="77.0" radius="80.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="38.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" rotate="-60.0">
                <image>
                   <Image url="@../replay.png" />
                </image>
@@ -107,7 +107,7 @@
             <Font name="Arial" size="84.0" />
          </font>
       </Text>
-        <Group fx:id="save" layoutX="-25.0" layoutY="591.0" scaleX="0.5" scaleY="0.5">
+        <Group fx:id="save" layoutX="-25.0" layoutY="591.0" onMouseClicked="#restartGame" scaleX="0.5" scaleY="0.5">
             <children>
                 <ImageView fitHeight="70.0" fitWidth="274.0" layoutX="-7.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                     <image>

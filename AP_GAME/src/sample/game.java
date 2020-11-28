@@ -10,16 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
-import static java.lang.Thread.sleep;
 
 public class game {
     private static game instance;
@@ -43,8 +40,7 @@ public class game {
     private VBox ObstaclePanel;
     private Player_ball pb;
     private double obs_vel = 0;
-    private AnimationTimer an;
-    private boolean isPaused = false;
+    private boolean isPaused;
     public Score_board getScore_board() {
         return score_board;
     }
@@ -58,7 +54,7 @@ public class game {
         input = new ArrayList<String>();
 
         new AnimationTimer()
-        {   long lastNanoTime =System.nanoTime();
+        {   long lastNanoTime = System.nanoTime();
             public void handle(long currentNanoTime)
             {
                 // calculate time since last update.
@@ -66,7 +62,6 @@ public class game {
                 lastNanoTime = currentNanoTime;
 
                 //Rotation
-
                 animate_obs(elapsedTime);
                 while (at_60percent()){
                     simulate_climb();
@@ -74,6 +69,11 @@ public class game {
                 if(pb.getLayoutY()>=st_art.getPositionY()-50){
                     pb.setVelocity(0);
                     pb.setLayoutY(st_art.getPositionY()-50);
+                }else if(isPaused){
+                    System.out.println("did reach here");
+                    pb.setVelocity(0);
+                    pb.setTranslateY(pb.getTranslateY()+5);
+                    isPaused = false;
                 }
                 else{
                     // acceleration below
@@ -89,6 +89,7 @@ public class game {
                 if(check_collisions()){
                     try {
                         exit_menu();
+                        isPaused = true;
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -97,6 +98,7 @@ public class game {
                 if(at_0percent(pb)){
                     try {
                         exit_menu();
+                        isPaused = true;
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -106,6 +108,7 @@ public class game {
                     pause_button.Clickcheckdone();
                     try {
                         pause_menu();
+                        isPaused = true;
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -118,7 +121,6 @@ public class game {
         theStage.show();
     }
     private void pause_menu() throws IOException {
-        isPaused = true;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseMenu.fxml"));
         Parent root = (Parent)loader.load();
         PauseMenu controller = (PauseMenu) loader.getController();

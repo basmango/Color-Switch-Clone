@@ -93,18 +93,18 @@ public class ExitMenu implements Initializable {
             e.printStackTrace();
         }
         //updating and writing best score
-        try {
-            FileWriter myWriter = new FileWriter("best_score.txt");
-            if(getCurrent_best_score()<getCurrent_score()) {
+        if(getCurrent_best_score()<getCurrent_score()) {
+            try {
+                FileWriter myWriter = new FileWriter("best_score.txt");
                 myWriter.write(Long.toString(getCurrent_score()));
                 setCurrent_best_score(getCurrent_score());
+                myWriter.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
             }
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
-        best_score.setText(getCurrent_best_score()+"");
+        best_score.setText(getCurrent_best_score() +"");
         //reading collected stars
         try {
             FileReader obj = new FileReader("collected_stars.txt");
@@ -158,4 +158,14 @@ public class ExitMenu implements Initializable {
         st.play();
     }
 
+    @FXML
+    private void startGame(MouseEvent mouseEvent) {
+        game g = new game();
+        g.start_game(stage);
+    }
+
+    @FXML
+    private void restartGame(MouseEvent mouseEvent) {
+        game.getInstance().resume_game();
+    }
 }
