@@ -6,6 +6,10 @@ import javafx.scene.transform.Rotate;
 
 public class Circle_ob extends Obstacle{
 Circle_ob(){
+  init();
+
+}
+protected void init(){
     shapes.add(add_arc(150,125,true,true, Color.web("0xFF0082")));
     shapes.add(add_arc(150,125,false,true,Color.web("0x8D13FA")));
     shapes.add(add_arc(150,125,true,false,Color.web("0x35E2F2")));
@@ -13,14 +17,16 @@ Circle_ob(){
     //add_arc(this,-1,1,Color.CYAN);
     // add_arc(this,-1,-1,Color.YELLOW)
     // ;
-    star = new Star();
+    this.addStar();
+    this.chance_add_switcher();
+    if(hasswitch)cs.translateY(40);
 
     shape_group.getChildren().addAll(shapes);
     complete_group.getChildren().add(shape_group);
 
-    star.addto(complete_group);
     complete_group.setTranslateX(105);
-    complete_group.setTranslateY(-200);
+//    complete_group.setTranslateY(-200);
+    render_collectibles();
 }
     public void motion(double elapsedtime){
         shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));

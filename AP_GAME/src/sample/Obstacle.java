@@ -1,6 +1,8 @@
 package sample;
 
+import java.awt.image.RasterOp;
 import java.util.LinkedList;
+import java.util.Random;
 
 
 import javafx.scene.Group;
@@ -18,6 +20,8 @@ public  abstract class Obstacle {
     public Group shape_group = new Group();
     protected LinkedList<Shape> shapes = new LinkedList<Shape>();
     protected Star star;
+    boolean hasStar = false, hasswitch = false;
+    protected  ColorSwitcher cs;
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
@@ -56,17 +60,51 @@ public  abstract class Obstacle {
 
 
     }
-    public void check_star_collision(Player_ball pb, Scene sc,Score_board score_board){
-        if(this.star.check_collision(pb,sc)){
+    public void check_collectible_collision(Player_ball pb, Scene sc,Score_board score_board){
+        if(this.hasStar && this.star.check_collision(pb,sc)){
             this.star.action(pb,score_board);
             this.star.setDisabled();
-                }
+            this.hasStar=false;
+        }
+        if(this.hasswitch && this.cs.check_collision(pb,sc)){
+            this.cs.action(pb,score_board);
+            this.cs.setDisabled();
+            this.hasswitch = false;
+        }
+    }
+    protected void addStar(){
+        star = new Star();
+        this.hasStar =true;
+        star.addto(complete_group);
+//        star.render();
     }
     public abstract  void motion(double elapsedtime);
 
+    protected void add_color_switcher(){
+        cs = new ColorSwitcher();
+        cs.addto(complete_group);
+        cs.translateY(232);
+        this.hasswitch = true;
+    }
+    protected void add_color_switcher(Color[] colors){
+        cs = new ColorSwitcher(colors);
+        cs.addto(complete_group);
+        cs.translateY(300);
+        this.hasswitch = true;
+    }
+    protected void chance_add_switcher(){
+        Random rand = new Random();
+        if(rand.nextInt(2)==1) {
+            add_color_switcher();
+        }
 
+    }
+    protected void render_collectibles(){
+     if(hasStar)star.render();
+     if(hasswitch)cs.render();
+    }
     public abstract boolean check_collision(Player_ball p);
-
+    protected abstract  void init();
 
 
 }

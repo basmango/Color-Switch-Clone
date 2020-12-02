@@ -72,15 +72,16 @@ public class game {
                 }else if(isPaused){
                     System.out.println("did reach here");
                     pb.setVelocity(0);
-                    pb.setTranslateY(pb.getTranslateY()+5);
                     isPaused = false;
                 }
                 else{
                     // acceleration below
-                    pb.addVelocity(2000*elapsedTime);
+                    pb.addVelocity(3000*elapsedTime);
                 }
 
+
                 if (input.contains("SPACE")){
+                    pb.unfreeze();
                     pb.setVelocity(-650);
                 }
 
@@ -98,7 +99,8 @@ public class game {
                 if(at_0percent(pb)){
                     try {
                         exit_menu();
-                        isPaused = true;
+                        pb.freeze();
+                        pb.setTranslateY(pb.getTranslateY()-10);
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -134,7 +136,9 @@ public class game {
     }
     public void resume_game(){
         this.theStage.setScene(theScene);
+        pb.freeze();
         gameloop();
+
 
     }
     private void exit_menu() throws IOException {
@@ -161,17 +165,9 @@ public class game {
             if(ob.check_collision(pb)){
                 return true;
             }
-            ob.check_star_collision(pb,theScene,score_board);
+            ob.check_collectible_collision(pb,theScene,score_board);
         }
-        for(ColorSwitcher cs : colorSwitchers){
-            if(cs.check_collision(pb,theScene)){
-                cs.action(pb,score_board);
-                cs.setDisabled();
-                colorSwitchers.remove(cs);
-                break;
-            }
 
-        }
         return false;
     }
     private void update_obs(){
@@ -214,7 +210,8 @@ public class game {
         this.immobile_gui.add(pause_button);
 
         ObstaclePanel = new VBox();
-        ObstaclePanel.setSpacing(100);
+        ObstaclePanel.setSpacing(200);
+//        ObstaclePanel.setTranslateY(-300);
         obs= new LinkedList<Obstacle>();
         //ObstaclePanel.getChildren().add(art);
         pb = new Player_ball();
@@ -227,10 +224,10 @@ public class game {
         addobs();
         addobs();
         for (Node nm: ObstaclePanel.getChildren()){
-            nm.setLayoutX(256);
-            nm.setTranslateY(-600);
+//            nm.setLayoutX(256);
+            nm.setTranslateY(-800);
         }
-        theScene =new Scene(gp,512,800,Color.web("#242020"));
+        theScene =new Scene(gp,512,800,Color.web("292929"));
 
         theStage.setScene(theScene);
 
@@ -248,14 +245,7 @@ public class game {
         for(Screen_art sc : immobile_gui) sc.render();
         for(Screen_art sc: mobile_gui) sc.render();
     }
-    private void addcolorswitcher(){
-        ColorSwitcher cs = new ColorSwitcher();
-        colorSwitchers.add(cs);
-        addtoVbox(cs.gc.getCanvas());
-        cs.translateX(232);
-        cs.render();
 
-    }
     private void addobs(){
         Random random = new Random();
         switch(random.nextInt(3)){
@@ -272,7 +262,6 @@ public class game {
                 obs.add(s3);
                 addtoVbox(s3.complete_group);
         }
-        addcolorswitcher();
     }
     private void addtoVbox(Node addition){
         double max = 0;

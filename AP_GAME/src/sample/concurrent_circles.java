@@ -19,53 +19,68 @@ public  class concurrent_circles extends Obstacle{
     public Group shape_group = new Group();
     public Group shape_group2 = new Group();
     private LinkedList<Shape> shapes = new LinkedList<Shape>();
-    private Star star;
+    private LinkedList<Shape> shapes_sec = new LinkedList<Shape>();
+    private int r1,r2,r3,ir1,ir2,ir3;
+    private int thickness = 20;
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
   concurrent_circles(){
 
 //
-        shapes.add(add_arc(107,107-25,true,false,Color.web("0xFF0082")));
-        shapes.add(add_arc(107,107-25,false,false,Color.web("0x8D13FA")));
-        shapes.add(add_arc(107,107-25,true,true,Color.web("0x35E2F2")));
-        shapes.add(add_arc(107,107-25,false,true,Color.web("0xF5DF0D")));
+    init();
 
-        shapes.add(add_arc(135,110,true,false,Color.web("0xFF0082")));
-        shapes.add(add_arc(135,110,false,false,Color.web("0x8D13FA")));
-        shapes.add(add_arc(135,110,true,true,Color.web("0x35E2F2")));
-        shapes.add(add_arc(135,110,false,true,Color.web("0xF5DF0D")));
+    }
+    protected void init(){
+        r1 = 176;
+        ir1=r1-thickness;
+        r2 = ir1-5;
+        ir2 = r2-thickness;
+        r3 = ir2 - 5;
+        ir3 = r3-thickness;
+        shapes.add(add_arc(r3,ir3,true,false,Color.web("0xFF0082")));
+        shapes.add(add_arc(r3,ir3,false,false,Color.web("0x8D13FA")));
+        shapes.add(add_arc(r3,ir3,true,true,Color.web("0x35E2F2")));
+        shapes.add(add_arc(r3,ir3,false,true,Color.web("0xF5DF0D")));
 
-        shapes.add(add_arc(165,140,true,false,Color.web("0xFF0082")));
-      shapes.add(add_arc(165,140,false,false,Color.web("0x8D13FA")));
-      shapes.add(add_arc(165,140,true,true,Color.web("0x35E2F2")));
-      shapes.add(add_arc(165,140,false,true,Color.web("0xF5DF0D")));
-        //add_arc(this,-1,1,Color.CYAN);
-        // add_arc(this,-1,-1,Color.YELLOW)
-        // ;
-        star = new Star();
+        shapes_sec.add(add_arc(r2,ir2,true,false,Color.web("0xFF0082")));
+        shapes_sec.add(add_arc(r2,ir2,false,false,Color.web("0x8D13FA")));
+        shapes_sec.add(add_arc(r2,ir2,true,true,Color.web("0x35E2F2")));
+        shapes_sec.add(add_arc(r2,ir2,false,true,Color.web("0xF5DF0D")));
+
+        shapes.add(add_arc(r1,ir1,true,false,Color.web("0xFF0082")));//no
+        shapes.add(add_arc(r1,ir1,false,false,Color.web("0x8D13FA")));//blue
+        shapes.add(add_arc(r1,ir1,true,true,Color.web("0x35E2F2")));//light_blue
+        shapes.add(add_arc(r1,ir1,false,true,Color.web("0xF5DF0D")));//pink
+
+        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+22.5, 0, 0,0, Rotate.Z_AXIS));
+        shape_group2.getTransforms().add(new Rotate(shape_group2.getRotate()+22.5, 0, 0,0, Rotate.Z_AXIS));
+//        for (Shape s : shapes_sec)s.setRotate(22.5);
         shape_group.getChildren().addAll(shapes);
-//        shape_group2.setTranslateX(-300);
-
+        shape_group2.getChildren().addAll(shapes_sec);
+//        shape_group1.setTranslateX(-300);
+        shapes.addAll(shapes_sec);
         complete_group.getChildren().clear();
+        Color color_vals[] = new Color[]{Color.web("0xF5DF0D"),Color.web("0xFF0082")};
+        addStar();
+        add_color_switcher(color_vals);
+        cs.gc.getCanvas().setTranslateY(350);
+        shape_group2.setRotate(shape_group2.getRotate()+22.5);
+        complete_group.getChildren().addAll(shape_group,shape_group2);
+        complete_group.setTranslateX(80);
+//        complete_group.setTranslateY(-200);
+//        complete_group.setRotate(22.5);
 
-        complete_group.getChildren().addAll(shape_group);
-        star.addto(complete_group);
-        complete_group.setTranslateX(105);
-        complete_group.setTranslateY(-200);
+        this.render_collectibles();
 
-
+//        complete_group.setTranslateY(-201);
     }
 
-    public void check_star_collision(Player_ball pb, Scene sc,Score_board score_board){
-        if(this.star.check_collision(pb,sc)){
-            this.star.action(pb,score_board);
-            this.star.setDisabled();
-        }
-    }
     public void motion(double elapsedtime){
-        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+50*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
-        }
+        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
+
+        shape_group2.getTransforms().add(new Rotate(shape_group.getRotate()-100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
+    }
     public void move(double val){
         this.shape_group.setTranslateY(this.shape_group.getTranslateY()+val);
     }
