@@ -22,6 +22,7 @@ public  abstract class Obstacle {
     protected Star star;
     boolean hasStar = false, hasswitch = false;
     protected  ColorSwitcher cs;
+    protected Rectangle boundbox;
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
@@ -103,6 +104,13 @@ public  abstract class Obstacle {
      if(hasStar)star.render();
      if(hasswitch)cs.render();
     }
+    protected void rect_bound(){
+        Rectangle sp  = new Rectangle(200,500,Color.TRANSPARENT);
+        sp.setTranslateY(-250);
+        complete_group.getChildren().add(sp);
+        boundbox = sp;
+    }
+
     public abstract boolean check_collision(Player_ball p);
     protected abstract  void init();
 

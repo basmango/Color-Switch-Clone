@@ -10,6 +10,8 @@ Circle_ob(){
 
 }
 protected void init(){
+    this.rect_bound();
+    boundbox.setHeight(600);
     shapes.add(add_arc(150,125,true,true, Color.web("0xFF0082")));
     shapes.add(add_arc(150,125,false,true,Color.web("0x8D13FA")));
     shapes.add(add_arc(150,125,true,false,Color.web("0x35E2F2")));
@@ -19,7 +21,7 @@ protected void init(){
     // ;
     this.addStar();
     this.chance_add_switcher();
-    if(hasswitch)cs.translateY(40);
+    if(hasswitch)cs.translateY(60);
 
     shape_group.getChildren().addAll(shapes);
     complete_group.getChildren().add(shape_group);

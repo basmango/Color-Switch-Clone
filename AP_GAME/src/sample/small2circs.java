@@ -30,6 +30,8 @@ public  class small2circs extends Obstacle{
 
     }
     protected  void init(){
+        this.rect_bound();
+        boundbox.setTranslateY(-220);
         shapes.add(add_arc(107,107-25,true,true,Color.web("0xFF0082")));
         shapes.add(add_arc(107,107-25,false,true,Color.web("0x8D13FA")));
         shapes.add(add_arc(107,107-25,true,false,Color.web("0x35E2F2")));
@@ -47,15 +49,19 @@ public  class small2circs extends Obstacle{
         shape_group.getChildren().addAll(shapes);
 //        shape_group2.setTranslateX(-300);
         shape_group2.setTranslateX(215);
-        complete_group.getChildren().clear();
+//        complete_group.getChildren().clear();
         shapes.addAll(shapes2);
         complete_group.getChildren().addAll(shape_group,shape_group2);
         complete_group.setTranslateX(45);
 //        complete_group.setTranslateY(-200);
         addStar();
-        star.translateY(-200);
+        star.translateY(-170);
         this.star.translateX(105);
-
+        chance_add_switcher();
+        if(hasswitch) {
+            cs.translateY(10);
+            cs.translateX(105);
+        }
         this.render_collectibles();
 
     }

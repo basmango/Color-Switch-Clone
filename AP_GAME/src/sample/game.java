@@ -91,6 +91,7 @@ public class game {
                     try {
                         exit_menu();
                         isPaused = true;
+                        pb.setTranslateY(-20);
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -210,7 +211,7 @@ public class game {
         this.immobile_gui.add(pause_button);
 
         ObstaclePanel = new VBox();
-        ObstaclePanel.setSpacing(200);
+        ObstaclePanel.setSpacing(0);
 //        ObstaclePanel.setTranslateY(-300);
         obs= new LinkedList<Obstacle>();
         //ObstaclePanel.getChildren().add(art);

@@ -32,6 +32,8 @@ public  class concurrent_circles extends Obstacle{
 
     }
     protected void init(){
+        this.rect_bound();
+        boundbox.setHeight(600);
         r1 = 176;
         ir1=r1-thickness;
         r2 = ir1-5;
@@ -60,11 +62,11 @@ public  class concurrent_circles extends Obstacle{
         shape_group2.getChildren().addAll(shapes_sec);
 //        shape_group1.setTranslateX(-300);
         shapes.addAll(shapes_sec);
-        complete_group.getChildren().clear();
+//        complete_group.getChildren().clear();
         Color color_vals[] = new Color[]{Color.web("0xF5DF0D"),Color.web("0xFF0082")};
         addStar();
         add_color_switcher(color_vals);
-        cs.gc.getCanvas().setTranslateY(350);
+        cs.translateY(10);
         shape_group2.setRotate(shape_group2.getRotate()+22.5);
         complete_group.getChildren().addAll(shape_group,shape_group2);
         complete_group.setTranslateX(80);
