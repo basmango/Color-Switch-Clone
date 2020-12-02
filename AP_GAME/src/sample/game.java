@@ -252,8 +252,8 @@ public class game {
     private void addobs(){
         Random random = new Random();
         Obstacle ob = new Circle_ob();
-        switch(random.nextInt(1)){
-            case 5: ob = new Circle_ob();
+        switch(random.nextInt(5)){
+            case 0: ob = new Circle_ob();
                 break;
             case 1: ob= new small2circs();
                    break;
@@ -261,7 +261,7 @@ public class game {
                     break;
             case 3: ob  = new Vertical_bars();
                     break;
-            case 0: ob  = new circle_sq();
+            case 4: ob  = new circle_sq();
         }
 
         if(ob!=null) {
