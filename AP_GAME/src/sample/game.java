@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -223,10 +224,11 @@ public class game {
         score_board.addto(gp);
         st_art.addto(gp);
         addobs();
+        if (obs.getFirst().cs!=null) obs.getFirst().cs.setDisabled();
         addobs();
         for (Node nm: ObstaclePanel.getChildren()){
 //            nm.setLayoutX(256);
-            nm.setTranslateY(-800);
+            nm.setTranslateY(-700);
         }
         theScene =new Scene(gp,512,800,Color.web("292929"));
 
@@ -249,20 +251,22 @@ public class game {
 
     private void addobs(){
         Random random = new Random();
-        switch(random.nextInt(3)){
-            case 0:Obstacle ob = new Circle_ob();
-
-                obs.add(ob);
-                addtoVbox(ob.complete_group);
+        Obstacle ob = new Circle_ob();
+        switch(random.nextInt(4)){
+            case 0: ob = new Circle_ob();
                 break;
-            case 1: small2circs s2 = new small2circs();
-                    obs.add(s2);
-                    addtoVbox(s2.complete_group);
+            case 1: ob= new small2circs();
+                   break;
+            case 2: ob= new concurrent_circles();
                     break;
-            case 2: concurrent_circles s3 = new concurrent_circles();
-                obs.add(s3);
-                addtoVbox(s3.complete_group);
+            case 3: ob  = new Vertical_bars();
         }
+
+        if(ob!=null) {
+            obs.add(ob);
+            addtoVbox(ob.complete_group);
+        }
+
     }
     private void addtoVbox(Node addition){
         double max = 0;

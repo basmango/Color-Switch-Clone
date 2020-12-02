@@ -44,7 +44,6 @@ public  class concurrent_circles extends Obstacle{
         shapes.add(add_arc(r3,ir3,false,false,Color.web("0x8D13FA")));
         shapes.add(add_arc(r3,ir3,true,true,Color.web("0x35E2F2")));
         shapes.add(add_arc(r3,ir3,false,true,Color.web("0xF5DF0D")));
-
         shapes_sec.add(add_arc(r2,ir2,true,false,Color.web("0xFF0082")));
         shapes_sec.add(add_arc(r2,ir2,false,false,Color.web("0x8D13FA")));
         shapes_sec.add(add_arc(r2,ir2,true,true,Color.web("0x35E2F2")));

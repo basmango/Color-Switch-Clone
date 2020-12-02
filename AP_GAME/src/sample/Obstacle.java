@@ -61,6 +61,24 @@ public  abstract class Obstacle {
 
 
     }
+    protected  Rectangle add_rounded_rect(int width,int height,Color c) {
+       Rectangle  shape = new Rectangle(width,height,c);
+        shape.setArcHeight(width);
+        shape.setArcWidth(width);
+
+        return shape;
+    }
+    protected  Rectangle add__rect(int width,int height,Color c) {
+        Rectangle  shape = new Rectangle(width,height,c);
+        return shape;
+    }
+    protected Circle unit_circles(int radius, Color c){
+        return new Circle(radius,c);
+
+    }
+    protected Circle getStandardCircle(Color c){
+        return unit_circles(30,c);
+    }
     public void check_collectible_collision(Player_ball pb, Scene sc,Score_board score_board){
         if(this.hasStar && this.star.check_collision(pb,sc)){
             this.star.action(pb,score_board);
