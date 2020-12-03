@@ -16,37 +16,64 @@ import java.util.Random;
 
 public class circle_sq extends Obstacle {
     Group gp1 = new Group();
-
+    double accumulated_time = 0;
     LinkedList<Circle> shapes= new LinkedList<Circle>();
-    private double time_period = 350;
+    private double time_period = 4;
     private double accumulated;
     private double side_length = 250;
     private double offset = 240;
     private int circle_radius = 20;
     private int seperation = 0;
-    private double velocity = 100;
+    private double velocity = (side_length*4)/time_period;
     circle_sq(){
         init();
     }
 
     @Override
     public void motion(double elapsedtime) {
-     for(Circle c : shapes)apply_motion_rule(c,elapsedtime);
+        accumulated_time += elapsedtime;
+        accumulated_time = accumulated_time%time_period;
+        double offset = 0;
+     for(Circle c : shapes) {
+         apply_periodic_function(c, accumulated_time + offset);
+     offset +=0.201   ;
+     }
+    }
+    private void apply_periodic_function(Circle c, double time){
+        time = time% time_period;
+        double seg = time%(time_period/4);
+        if(time < time_period/4){
+            c.setTranslateY(0);
+            c.setTranslateX(velocity*seg);
+//            System.out.println("First");
+        }
+        else if(time >= time_period/4 && time <time_period/2){
+            c.setTranslateX((time_period/4)*velocity);
+            c.setTranslateY(velocity * seg);
+//            System.out.println("Second");
+        }
+        else if(time >= 3*(time_period)/4){
+            c.setTranslateY((time_period/4)*velocity  - velocity* seg);
+//            System.out.println("Last");
+        }
+        else if(time >= time_period/2 ){
+            c.setTranslateX((time_period/4)*velocity - velocity * seg);
+//            System.out.println("Second Last");
+        }
 
     }
-
     private void apply_motion_rule(Circle c,double elapsedtime){
         if(c.getTranslateX() <= 0 && c.getTranslateY()>0){
-            c.setTranslateY(c.getTranslateY() -100 * elapsedtime);
+            c.setTranslateY(c.getTranslateY() -300 * elapsedtime);
         }
        if(c.getTranslateX()<= side_length && c.getTranslateY()<=0){
-           c.setTranslateX(c.getTranslateX()+100*elapsedtime);
+           c.setTranslateX(c.getTranslateX()+300*elapsedtime);
        }
        if(c.getTranslateX()>=side_length && c.getTranslateY()<side_length){
-           c.setTranslateY(c.getTranslateY()+100*elapsedtime);
+           c.setTranslateY(c.getTranslateY()+300*elapsedtime);
        }
        if(c.getTranslateX()> 0 && c.getTranslateY() >=side_length){
-           c.setTranslateX(c.getTranslateX()-100*elapsedtime);
+           c.setTranslateX(c.getTranslateX()-300*elapsedtime);
        }
 
     }
@@ -66,13 +93,13 @@ public class circle_sq extends Obstacle {
         Color[] colors  = new Color[]{Color.web("0xFF0082"),Color.web("0x8D13FA"),Color.web("0x35E2F2"),Color.web("0xF5DF0D")};
         LinkedList<Circle>[] sides = new LinkedList[4];
         for(int i = 0; i < 4;i++ )sides[i] = populate_linked(colors[i]);
-        spreadX(sides[0],0);
-        spreadX(sides[2],1);
-        spreadY(sides[1],1);
-        spreadY(sides[3],0);//light blue
-        for(Circle c : sides[2])c.setTranslateY(side_length);
-        for(Circle c : sides[3])c.setTranslateX(side_length);
-
+//        spreadX(sides[0],0);
+//        spreadX(sides[2],1);
+//        spreadY(sides[1],1);
+//        spreadY(sides[3],0);//light blue
+//        for(Circle c : sides[2])c.setTranslateY(side_length);
+//        for(Circle c : sides[3])c.setTranslateX(side_length);
+//
         for(LinkedList<Circle> circs :sides)
         shapes.addAll(circs);
         gp.getChildren().addAll(shapes);
@@ -93,7 +120,7 @@ public class circle_sq extends Obstacle {
 
     }
     private LinkedList<Circle>  populate_linked(Color c){
-        int num = (int)side_length/(circle_radius*2) -1 ;
+        int num = 5;//(int)side_length/(circle_radius*2) -1 ;
         LinkedList<Circle> return_val = new LinkedList<Circle>();
         Circle circ;
         for(int i =0; i < num ; i++){
@@ -105,12 +132,14 @@ public class circle_sq extends Obstacle {
     @Override
     protected void init() {
         this.rect_bound();
-        this.time_period = (4.0 * side_length)/velocity;
+     boundbox.setTranslateY(-side_length/4);
+    boundbox.setTranslateX(-20);
 //    this.boundbox.setFill(Color.BEIGE);
-//        this.boundbox.setHeight(450);
-//        this.boundbox.setWidth(600);
+     this.boundbox.setHeight(2*side_length);
+
+        this.boundbox.setWidth(side_length + side_length/2);
 //        boundbox.setTranslateY(50);
-        complete_group.setTranslateX(100);
+        complete_group.setTranslateX(110);
         populate_groups();
         addStar();
         star.translateX(side_length/2);

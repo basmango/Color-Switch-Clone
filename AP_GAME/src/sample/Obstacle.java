@@ -6,6 +6,7 @@ import java.util.Random;
 
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -67,6 +68,10 @@ public  abstract class Obstacle {
         shape.setArcWidth(width);
 
         return shape;
+
+    }
+    protected void rotate_node(Node gp, double deg){
+        gp.getTransforms().add(new Rotate(gp.getRotate()+deg, 0, 0,0, Rotate.Z_AXIS));
     }
     protected  Rectangle add__rect(int width,int height,Color c) {
         Rectangle  shape = new Rectangle(width,height,c);

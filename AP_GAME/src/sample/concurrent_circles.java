@@ -33,7 +33,7 @@ public  class concurrent_circles extends Obstacle{
     }
     protected void init(){
         this.rect_bound();
-        boundbox.setHeight(600);
+        boundbox.setHeight(700);
         r1 = 176;
         ir1=r1-thickness;
         r2 = ir1-5;

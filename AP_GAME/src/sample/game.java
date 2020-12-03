@@ -178,7 +178,6 @@ public class game {
         if(at_0percent_obs(ob)){
             obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
-        System.out.println("test");
         }
 
         while(obs.size()<3){
@@ -224,11 +223,14 @@ public class game {
         score_board.addto(gp);
         st_art.addto(gp);
         addobs();
-        if (obs.getFirst().cs!=null) obs.getFirst().cs.setDisabled();
+        if (obs.getFirst().cs!=null) {
+            obs.getFirst().cs.action(pb,score_board);
+            obs.getFirst().cs.setDisabled();
+        }
         addobs();
         for (Node nm: ObstaclePanel.getChildren()){
 //            nm.setLayoutX(256);
-            nm.setTranslateY(-700);
+            nm.setTranslateY(-800);
         }
         theScene =new Scene(gp,512,800,Color.web("292929"));
 
@@ -252,16 +254,26 @@ public class game {
     private void addobs(){
         Random random = new Random();
         Obstacle ob = new Circle_ob();
-        switch(random.nextInt(5)){
-            case 0: ob = new Circle_ob();
+        switch(random.nextInt(9)){
+            case 0: ob = new Horizontal_Bars();
                 break;
-            case 1: ob= new small2circs();
+            case 1: ob = new XWheel();
+                break;
+            case 2: ob = new Square();
+                break;
+            case 3: ob = new Triangle();
+                break;
+            case 4: ob = new Circle_ob();
+                break;
+            case 5: ob= new small2circs();
                    break;
-            case 2: ob= new concurrent_circles();
+            case 6: ob= new concurrent_circles();
                     break;
-            case 3: ob  = new Vertical_bars();
+            case 7: ob  = new Vertical_bars();
                     break;
-            case 4: ob  = new circle_sq();
+            case 8: ob  = new circle_sq();
+                    break;
+
         }
 
         if(ob!=null) {

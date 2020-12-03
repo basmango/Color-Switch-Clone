@@ -77,7 +77,7 @@ public class Vertical_bars extends Obstacle {
     protected void init() {
     this.rect_bound();
 //    this.boundbox.setFill(Color.BEIGE);
-    this.boundbox.setHeight(450);
+    this.boundbox.setHeight(350);
     this.boundbox.setWidth(600);
     boundbox.setTranslateY(50);
     complete_group.setTranslateX(-500);

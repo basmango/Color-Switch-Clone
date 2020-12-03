@@ -37,6 +37,6 @@ public class ColorSwitcher extends Collectible {
 
 
     public  void action (Player_ball pb,Score_board sc){
-        pb.setFill(this.getColor());
+        if (!this.getDisabled())pb.setFill(this.getColor());
     }
 }
