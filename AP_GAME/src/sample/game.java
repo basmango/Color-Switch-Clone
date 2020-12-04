@@ -73,7 +73,6 @@ public class game {
                     pb.setVelocity(0);
                     pb.setLayoutY(st_art.getPositionY()-50);
                 }else if(isPaused){
-                    System.out.println("did reach here");
                     pb.setVelocity(0);
                     isPaused = false;
                 }
@@ -94,7 +93,7 @@ public class game {
                     try {
                         exit_menu();
                         isPaused = true;
-                        pb.setTranslateY(-20);
+//                        set_resume_point();
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -104,7 +103,7 @@ public class game {
                     try {
                         exit_menu();
                         pb.freeze();
-                        pb.setTranslateY(pb.getTranslateY()-10);
+                        pb.setTranslateY(pb.getTranslateY()-50);
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -126,6 +125,9 @@ public class game {
 //        System.out.println("testend");
         theStage.show();
     }
+//    private void set_resume_point(){
+//        obs.
+//    }
     private void pause_menu() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseMenu.fxml"));
         Parent root = (Parent)loader.load();
@@ -146,7 +148,6 @@ public class game {
 
     }
     private void exit_menu() throws IOException {
-//        Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
         Parent root = (Parent)loader.load();
@@ -156,7 +157,6 @@ public class game {
         theStage.setTitle("Exit Menu");
         theStage.setScene(s);
         theStage.show();
-//        System.out.println("test exec");
     }
 
     private void animate_obs(double elapsed_time){
@@ -167,6 +167,7 @@ public class game {
     private boolean check_collisions(){
         for(Obstacle ob : obs){
             if(ob.check_collision(pb)){
+                translate_to_safe();
                 return true;
             }
              if(ob.check_collectible_collision(pb,theScene,score_board)){
@@ -176,6 +177,20 @@ public class game {
 
         return false;
     }
+    private void translate_to_safe(){
+        boolean nostarscollected = true;
+        for(Obstacle ob : obs){
+            if(!ob.hasStar){
+                nostarscollected = false;
+                ob.check_bound_collision(pb);
+            }
+            if(nostarscollected){
+                pb.setVelocity(0);
+                pb.setTranslateY(pb.getTranslateY()+100);
+            }
+        }
+    }
+
     private void update_obs(){
         Obstacle ob;
         ob = obs.getFirst();

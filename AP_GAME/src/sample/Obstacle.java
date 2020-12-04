@@ -149,6 +149,14 @@ public  abstract class Obstacle {
         complete_group.getChildren().add(sp);
         boundbox = sp;
     }
+    public void check_bound_collision(Player_ball pb){
+        while(Shape.intersect(pb,boundbox).getBoundsInLocal().getWidth()!=-1){
+            pb.setTranslateY(pb.getTranslateY()-10);
+        }
+
+//        System.out.println("test");
+        }
+
 
     public abstract boolean check_collision(Player_ball p);
     protected abstract  void init();
