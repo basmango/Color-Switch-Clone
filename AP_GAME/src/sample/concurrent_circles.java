@@ -14,7 +14,6 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
 public  class concurrent_circles extends Obstacle{
-    private int angular_velocity = 5;
 
     public Group shape_group = new Group();
     public Group shape_group2 = new Group();
@@ -25,9 +24,10 @@ public  class concurrent_circles extends Obstacle{
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
-  concurrent_circles(){
-
-//
+  concurrent_circles(float difficulty){
+    setDifficulty_float(difficulty);
+    setTimeOfCreation();
+    angular_velocity = getDifficulity_float() * angular_velocity;
     init();
 
     }
@@ -78,13 +78,13 @@ public  class concurrent_circles extends Obstacle{
     }
 
     public void motion(double elapsedtime){
-        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
+        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+angular_velocity*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
 
-        shape_group2.getTransforms().add(new Rotate(shape_group.getRotate()-100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
+        shape_group2.getTransforms().add(new Rotate(shape_group.getRotate()-angular_velocity*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
     }
-    public void move(double val){
-        this.shape_group.setTranslateY(this.shape_group.getTranslateY()+val);
-    }
+//    public void move(double val){
+//        this.shape_group.setTranslateY(this.shape_group.getTranslateY()+val);
+//    }
 
 
     public boolean check_collision(Player_ball p){

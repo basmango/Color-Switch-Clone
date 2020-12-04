@@ -18,14 +18,20 @@ public class circle_sq extends Obstacle {
     Group gp1 = new Group();
     double accumulated_time = 0;
     LinkedList<Circle> shapes= new LinkedList<Circle>();
-    private double time_period = 4;
+
     private double accumulated;
     private double side_length = 250;
     private double offset = 240;
     private int circle_radius = 20;
     private int seperation = 0;
-    private double velocity = (side_length*4)/time_period;
-    circle_sq(){
+
+    private double velocity = 250;
+    private double time_period = (4f*side_length)/velocity;
+    circle_sq(float difficulty){
+        setTimeOfCreation();
+        setDifficulty_float(difficulty);
+        velocity = velocity*getDifficulity_float();
+        time_period = (4*side_length)/velocity;
         init();
     }
 
@@ -36,7 +42,7 @@ public class circle_sq extends Obstacle {
         double offset = 0;
      for(Circle c : shapes) {
          apply_periodic_function(c, accumulated_time + offset);
-     offset +=0.201   ;
+     offset +=(circle_radius*2+10)/velocity  ;
      }
     }
     private void apply_periodic_function(Circle c, double time){
@@ -120,7 +126,7 @@ public class circle_sq extends Obstacle {
 
     }
     private LinkedList<Circle>  populate_linked(Color c){
-        int num = 5;//(int)side_length/(circle_radius*2) -1 ;
+        int num = (int)side_length/(circle_radius*2)  - 1;
         LinkedList<Circle> return_val = new LinkedList<Circle>();
         Circle circ;
         for(int i =0; i < num ; i++){

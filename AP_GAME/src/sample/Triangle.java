@@ -7,7 +7,10 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
 public class Triangle extends Obstacle{
-    Triangle(){
+    Triangle(float difficulty){
+        setDifficulty_float(difficulty);
+        setTimeOfCreation();
+        angular_velocity = getDifficulity_float() *angular_velocity;
         init();
 
     }
@@ -46,7 +49,7 @@ public class Triangle extends Obstacle{
         render_collectibles();
     }
     public void motion(double elapsedtime){
-        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
+        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+angular_velocity*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
     }
     public boolean check_collision(Player_ball p){
         for(Shape s : this.shapes){

@@ -1,6 +1,8 @@
 package sample;
 
 import java.awt.image.RasterOp;
+import java.sql.Time;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -16,19 +18,30 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
 public  abstract class Obstacle {
-    private int angular_velocity = 5;
+    protected float angular_velocity = 100;
     public Group complete_group = new Group();
     public Group shape_group = new Group();
     protected LinkedList<Shape> shapes = new LinkedList<Shape>();
     protected Star star;
+    double time_of_creation = 0;
     boolean hasStar = false, hasswitch = false;
+    private float difficulty_float = 1.0f;
     protected  ColorSwitcher cs;
     protected Rectangle boundbox;
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
 
-
+    protected void setTimeOfCreation(){
+        Date date = new Date();
+        time_of_creation = date.getTime();
+    }
+    protected void setDifficulty_float(float val){
+        difficulty_float =val;
+    }
+    protected float getDifficulity_float(){
+        return difficulty_float;
+    }
     protected  Shape add_arc(int out,int in,boolean is_up, boolean is_right,Color c) {
 
         //drawing circle
@@ -84,17 +97,20 @@ public  abstract class Obstacle {
     protected Circle getStandardCircle(Color c){
         return unit_circles(30,c);
     }
-    public void check_collectible_collision(Player_ball pb, Scene sc,Score_board score_board){
+    public boolean check_collectible_collision(Player_ball pb, Scene sc,Score_board score_board){
+        boolean star_collision  = false;
         if(this.hasStar && this.star.check_collision(pb,sc)){
             this.star.action(pb,score_board);
             this.star.setDisabled();
             this.hasStar=false;
+            star_collision = true;
         }
         if(this.hasswitch && this.cs.check_collision(pb,sc)){
             this.cs.action(pb,score_board);
             this.cs.setDisabled();
             this.hasswitch = false;
         }
+        return star_collision;
     }
     protected void addStar(){
         star = new Star();

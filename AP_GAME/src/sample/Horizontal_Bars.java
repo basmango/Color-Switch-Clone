@@ -19,9 +19,13 @@ public class Horizontal_Bars extends Obstacle {
     LinkedList<Rectangle> shapes= new LinkedList<Rectangle>();
     private double accumulated_time;
     private  double time_period = 6;
-    private double velocity = 120;
+    private double velocity = 150;
     private int rec_length = 150;
-    Horizontal_Bars(){
+    Horizontal_Bars(float difficulty){
+        setDifficulty_float(difficulty);
+        setTimeOfCreation();
+        velocity = getDifficulity_float()*velocity;
+        time_period = (8*rec_length)/velocity;
         init();
     }
 
@@ -78,7 +82,7 @@ public class Horizontal_Bars extends Obstacle {
         complete_group.setTranslateX(-200);
         addStar();
         populate_groups();
-        time_period = (8*rec_length)/velocity;
+
         chance_add_switcher();
         if(hasswitch) {
             cs.translateX(450);

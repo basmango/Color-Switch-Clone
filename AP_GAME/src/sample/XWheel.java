@@ -9,7 +9,11 @@ import javafx.scene.transform.Rotate;
 import java.util.Random;
 
 public class XWheel extends Obstacle{
-    XWheel(){
+
+    XWheel(float difficulty){
+        setTimeOfCreation();
+        setDifficulty_float(difficulty);
+        angular_velocity = getDifficulity_float() * angular_velocity;
         init();
 
     }
@@ -60,7 +64,7 @@ public class XWheel extends Obstacle{
         render_collectibles();
     }
     public void motion(double elapsedtime){
-        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+100*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
+        shape_group.getTransforms().add(new Rotate(shape_group.getRotate()+angular_velocity*elapsedtime, 0, 0,0, Rotate.Z_AXIS));
     }
     public boolean check_collision(Player_ball p){
         for(Shape s : this.shapes){

@@ -19,16 +19,19 @@ public class Vertical_bars extends Obstacle {
     double accumulated;
     double amplitude = 300;
     double offset = 240;
-    Vertical_bars(){
-    init();
+    Vertical_bars(float difficulty){
+        setDifficulty_float(difficulty);
+        setTimeOfCreation();
+
+        init();
     }
 
     @Override
     public void motion(double elapsedtime) {
         accumulated+=elapsedtime;
         if(accumulated > time_period)accumulated -= time_period;
-        gp1.setTranslateX(amplitude*Math.sin((360/time_period)*accumulated));
-        gp2.setTranslateX(-amplitude*Math.sin((360/time_period)*accumulated-180));
+        gp1.setTranslateX(amplitude*Math.sin((360/time_period)*getDifficulity_float()*accumulated));
+        gp2.setTranslateX(-amplitude*Math.sin((360/time_period)*getDifficulity_float()*accumulated-180));
 
     }
 

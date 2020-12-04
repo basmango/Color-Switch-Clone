@@ -41,6 +41,8 @@ public class game {
     private VBox ObstaclePanel;
     private Player_ball pb;
     private double obs_vel = 0;
+    private float difficulty_increment = 0.05f;
+    private float difficulty  = 1f;
     private boolean isPaused;
     public Score_board getScore_board() {
         return score_board;
@@ -167,7 +169,9 @@ public class game {
             if(ob.check_collision(pb)){
                 return true;
             }
-            ob.check_collectible_collision(pb,theScene,score_board);
+             if(ob.check_collectible_collision(pb,theScene,score_board)){
+                 difficulty+=difficulty_increment;
+             }
         }
 
         return false;
@@ -253,33 +257,33 @@ public class game {
 
     private void addobs(){
         Random random = new Random();
-        Obstacle ob = new Circle_ob();
-        switch(random.nextInt(9)){
-            case 0: ob = new Horizontal_Bars();
+        Obstacle ob;
+        switch(random.nextInt(9 )){
+            case 0: ob = new Horizontal_Bars(difficulty);
                 break;
-            case 1: ob = new XWheel();
+            case 1: ob = new XWheel(difficulty);
                 break;
-            case 2: ob = new Square();
+            case 2: ob = new Square(difficulty);
                 break;
-            case 3: ob = new Triangle();
+            case 3: ob = new Triangle(difficulty);
                 break;
-            case 4: ob = new Circle_ob();
+            case 4: ob = new Circle_ob(difficulty);
                 break;
-            case 5: ob= new small2circs();
+            case 5: ob= new small2circs(difficulty);
                    break;
-            case 6: ob= new concurrent_circles();
+            case 6: ob= new concurrent_circles(difficulty);
                     break;
-            case 7: ob  = new Vertical_bars();
+            case 7: ob  = new Vertical_bars(difficulty);
                     break;
-            case 8: ob  = new circle_sq();
+            case 8:
+            default: ob  = new circle_sq(difficulty);
                     break;
 
         }
 
-        if(ob!=null) {
-            obs.add(ob);
-            addtoVbox(ob.complete_group);
-        }
+        obs.add(ob);
+        addtoVbox(ob.complete_group);
+
 
     }
     private void addtoVbox(Node addition){
