@@ -35,6 +35,11 @@ public class game_launcher extends Application
 
     public void start(Stage theStage)
     {
+        theStage.setMaxHeight(800);
+        theStage.setMaxWidth(512);
+        theStage.setMinHeight(800);
+        theStage.setMinWidth(512);
+
         try{
             show_main_menu(theStage);
         }
