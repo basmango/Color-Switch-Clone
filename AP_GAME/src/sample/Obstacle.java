@@ -93,20 +93,33 @@ public  abstract class Obstacle {
     protected Circle unit_circles(int radius, Color c){
         return new Circle(radius,c);
 
+
+    }
+    public boolean hascs(){
+        return this.hasswitch;
+    }
+    public  void apply_cs(Player_ball pb,Score_board score_board){
+        if(!this.hascs())return;
+        this.cs.action(pb,score_board);
+        this.cs.setDisabled();
+        this.hasswitch = false;
     }
     protected Circle getStandardCircle(Color c){
         return unit_circles(30,c);
     }
-    public boolean check_collectible_collision(Player_ball pb, Scene sc,Score_board score_board){
+    public synchronized boolean check_collectible_collision(Player_ball pb, Scene sc,Score_board score_board){
         boolean star_collision  = false;
         if(this.hasStar && this.star.check_collision(pb,sc)){
             this.star.action(pb,score_board);
             this.star.setDisabled();
             this.hasStar=false;
+            Sound.play_sound("star");
             star_collision = true;
         }
         if(this.hasswitch && this.cs.check_collision(pb,sc)){
+
             this.cs.action(pb,score_board);
+            Sound.play_sound("colorswitch");
             this.cs.setDisabled();
             this.hasswitch = false;
         }

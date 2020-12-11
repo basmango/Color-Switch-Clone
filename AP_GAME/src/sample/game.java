@@ -84,13 +84,14 @@ public class game {
 
                 if (input.contains("SPACE")){
                     pb.unfreeze();
-                    pb.setVelocity(-650);
+                    pb.jump();
                 }
 
                 update_obs();
                 update_and_refresh(elapsedTime);
                 if(check_collisions()){
                     try {
+                        Sound.play_sound("dead");
                         exit_menu();
                         isPaused = true;
 //                        set_resume_point();
@@ -101,6 +102,8 @@ public class game {
                 }
                 if(at_0percent(pb)){
                     try {
+
+                        Sound.play_sound("dead");
                         exit_menu();
                         pb.freeze();
                         pb.setTranslateY(pb.getTranslateY()-50);
@@ -233,9 +236,10 @@ public class game {
         score_board.addto(gp);
         st_art.addto(gp);
         addobs();
-        if (obs.getFirst().cs!=null) {
-            obs.getFirst().cs.action(pb,score_board);
-            obs.getFirst().cs.setDisabled();
+        if (obs.getFirst().hascs()) {
+            obs.getFirst().apply_cs(pb,score_board);
+
+
         }
         addobs();
         for (Node nm: ObstaclePanel.getChildren()){
