@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ExitMenu">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292929" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242520" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
         <Text fill="WHITE" layoutX="81.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
             <font>
                 <Font name="Arial" size="84.0" />

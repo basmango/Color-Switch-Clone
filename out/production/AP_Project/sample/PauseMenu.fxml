@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PauseMenu">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292929" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242520" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
         <Circle fill="#585858" layoutX="61.0" layoutY="60.0" onMouseClicked="#mainMenu" radius="31.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Group fx:id="pause" layoutX="262.0" layoutY="379.0" onMouseClicked="#resumeGame">
          <children>

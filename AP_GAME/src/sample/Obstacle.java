@@ -149,9 +149,11 @@ public  abstract class Obstacle {
         complete_group.getChildren().add(sp);
         boundbox = sp;
     }
-    public void check_bound_collision(Player_ball pb){
+    public void check_bound_collision(Player_ball pb,int sign){
+
+
         while(Shape.intersect(pb,boundbox).getBoundsInLocal().getWidth()!=-1){
-            pb.setTranslateY(pb.getTranslateY()-10);
+            pb.setTranslateY(pb.getTranslateY()+sign*10);
         }
 
 //        System.out.println("test");

@@ -167,7 +167,7 @@ public class game {
     private boolean check_collisions(){
         for(Obstacle ob : obs){
             if(ob.check_collision(pb)){
-                translate_to_safe();
+                translate_to_safe(ob);
                 return true;
             }
              if(ob.check_collectible_collision(pb,theScene,score_board)){
@@ -177,25 +177,16 @@ public class game {
 
         return false;
     }
-    private void translate_to_safe(){
-        boolean nostarscollected = true;
-        for(Obstacle ob : obs){
-            if(!ob.hasStar){
-                nostarscollected = false;
-                ob.check_bound_collision(pb);
-            }
-            if(nostarscollected){
-                pb.setVelocity(0);
-                pb.setTranslateY(pb.getTranslateY()+100);
-            }
-        }
+    private void translate_to_safe(Obstacle ob){
+       if(ob.hasStar){
+           ob.check_bound_collision(pb,1);
+       }
+       else{
+           ob.check_bound_collision(pb,-1);
+       }
     }
 
-    private void update_obs(){
-        Obstacle ob;
-        ob = obs.getFirst();
-        if(at_0percent_obs(ob)){
-            obs.remove(ob);
+            private void update_obs(){ Obstacle ob; ob = obs.getFirst(); if(at_0percent_obs(ob)){ obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
         }
 
@@ -251,7 +242,7 @@ public class game {
 //            nm.setLayoutX(256);
             nm.setTranslateY(-800);
         }
-        theScene =new Scene(gp,512,800,Color.web("292929"));
+        theScene =new Scene(gp,512,800,Color.web("242520"));
 
         theStage.setScene(theScene);
 
