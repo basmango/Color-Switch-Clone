@@ -268,7 +268,7 @@ public class game {
     private void addobs(){
         Random random = new Random();
         Obstacle ob;
-        switch(random.nextInt(9 )){
+        switch(random.nextInt(9)){
             case 0: ob = new Horizontal_Bars(difficulty);
                 break;
             case 1: ob = new XWheel(difficulty);

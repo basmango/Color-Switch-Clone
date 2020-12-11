@@ -26,15 +26,15 @@ public class Triangle extends Obstacle{
             shapes.add(add_rounded_rect(30,300,c));
         }
         this.rotate_node(shapes.get(0),330);
-        this.rotate_node(shapes.get(1),30);
-        this.rotate_node(shapes.get(2),90);
+        this.rotate_node(shapes.get(2),30);
+        this.rotate_node(shapes.get(1),90);
 
         shapes.get(0).setTranslateY(-156);
-        shapes.get(0).setTranslateX(-10);
-        shapes.get(2).setTranslateX(160);
-        shapes.get(2).setTranslateY(70);
-        shapes.get(1).setTranslateY(-170);
-        shapes.get(1).setTranslateX(3);
+        shapes.get(0).setTranslateX(-20);
+        shapes.get(1).setTranslateX(150);
+        shapes.get(1).setTranslateY(68);
+        shapes.get(2).setTranslateY(-172);
+        shapes.get(2).setTranslateX(-8);
 
         shape_group.getChildren().addAll(shapes);
      this.addStar();
