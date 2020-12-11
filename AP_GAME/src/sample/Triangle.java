@@ -21,7 +21,7 @@ public class Triangle extends Obstacle{
         boundbox.setTranslateX(-200);
         boundbox.setTranslateY(-200);
 //        this.boundbox.setFill(Color.BEIGE);
-        Color[] colors  = new Color[]{Color.web("0xFF0082"),Color.web("0x8D13FA"),Color.web("0xF5DF0D")};
+         Color[] colors  = new Color[]{Color.web("0xFF0082"),Color.web("0x8D13FA"),Color.web("0xF5DF0D")};
         for (Color c : colors){
             shapes.add(add_rounded_rect(30,300,c));
         }
