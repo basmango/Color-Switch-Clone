@@ -348,8 +348,8 @@ public class game {
     }
 
     public DataTable updateData() {
-        data = new DataTable(elapsedTime);
-        data.update(elapsedTime, obs, getScore_board(), pb);
+        data = new DataTable();
+        data.update( obs, getScore_board(), pb,difficulty);
         game_launcher.getDatabase().addData(data);
         return data;
     }
@@ -360,41 +360,25 @@ public class game {
         for(int i=0;i<o.size();i++) {
             Obstacle ob;
             float diff = data.getDifficulty().get(i);
-            switch (o.get(i)) {
-                case 0:
-                    ob = new Horizontal_Bars(diff);
-                    break;
-                case 1:
-                    ob = new XWheel(diff);
-                    break;
-                case 2:
-                    ob = new Square(diff);
-                    break;
-                case 3:
-                    ob = new Triangle(diff);
-                    break;
-                case 4:
-                    ob = new Circle_ob(diff);
-                    break;
-                case 5:
-                    ob = new small2circs(diff);
-                    break;
-                case 6:
-                    ob = new concurrent_circles(diff);
-                    break;
-                case 7:
-                    ob = new Vertical_bars(diff);
-                    break;
-                case 8:
-                default:
-                    ob = new circle_sq(diff);
-                    break;
-            }
+            ob = switch (o.get(i)) {
+                case 0 -> new Horizontal_Bars(diff);
+                case 1 -> new XWheel(diff);
+                case 2 -> new Square(diff);
+                case 3 -> new Triangle(diff);
+                case 4 -> new Circle_ob(diff);
+                case 5 -> new small2circs(diff);
+                case 6 -> new concurrent_circles(diff);
+                case 7 -> new Vertical_bars(diff);
+                default -> new circle_sq(diff);
+            };
+            difficulty = data.getDifficulty_val();
             ob.setHasStar(data.getStar().get(i));
             ob.setHasswitch(data.getColorSwitcher().get(i));
+            ob.set_cleared(data.getCleared().get(i));
+            ob.motion(data.getTimeElapsed().get(i));
+            ob.complete_group.setTranslateY(data.getYcoords().get(i));
             obs.add(ob);
             addtoVbox(ob.complete_group);
         }
-        elapsedTime = data.getTimeElapsed();
     }
 }

@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,12 +18,15 @@ public class DataTable implements Serializable {
     private ArrayList<Integer> obsid;
     private ArrayList<Boolean> star;
     private ArrayList<Boolean> colorSwitcher;
+    private ArrayList<Boolean> cleared;
     private ArrayList<Float> difficulty;
-    private double timeElapsed;
+    private ArrayList<Double> timeElapsed;
+    private ArrayList<Double> Ycoords;
     private String date;
     private String time;
-    private long stars_collected;
 
+    private long stars_collected;
+    private float difficulty_val;
     public long getStars_collected() {
         return stars_collected;
     }
@@ -41,7 +46,9 @@ public class DataTable implements Serializable {
     public ArrayList<Boolean> getStar() {
         return star;
     }
-
+    public ArrayList<Boolean> getCleared() {
+        return cleared;
+    }
     public ArrayList<Boolean> getColorSwitcher() {
         return colorSwitcher;
     }
@@ -50,11 +57,16 @@ public class DataTable implements Serializable {
         return difficulty;
     }
 
-    public double getTimeElapsed() {
+    public ArrayList<Double> getTimeElapsed() {
         return this.timeElapsed;
     }
-
-    public DataTable(double timeElapsed){
+    public ArrayList<Double> getYcoords(){
+        return Ycoords;
+    }
+    public float getDifficulty_val(){
+        return difficulty_val;
+    }
+    public DataTable(){
         LocalDate obj1 = LocalDate.now();
         LocalTime obj2 = LocalTime.now();
         DateTimeFormatter FormatObj1 = DateTimeFormatter.ofPattern("dd-MMM-yy");
@@ -67,21 +79,37 @@ public class DataTable implements Serializable {
         this.star = new ArrayList<>();
         this.colorSwitcher = new ArrayList<>();
         this.difficulty = new ArrayList<>();
-        this.timeElapsed = timeElapsed;
+        this.timeElapsed = new ArrayList<>();
+        this.cleared = new ArrayList<>();
+        this.Ycoords = new ArrayList<>();
+
     }
 
-    public void update(double timeElapsed, LinkedList<Obstacle> obs, Score_board score, Player_ball pb) {
-
-        this.timeElapsed = timeElapsed;
+    public void update(LinkedList<Obstacle> obs, Score_board score, Player_ball pb,float difficulty_val) {
+        clear_data();
         for(int i=0;i<obs.size();i++){
             obsid.add(obs.get(i).getId());
             star.add(obs.get(i).isHasStar());
             colorSwitcher.add(obs.get(i).isHasswitch());
             difficulty.add(obs.get(i).getDifficulity_float());
-        }
+            timeElapsed.add(obs.get(i).getTime_of_creation());
+            cleared.add(obs.get(i).isCleared());
+            Ycoords.add(obs.get(i).complete_group.getTranslateY());
+            }
         this.stars_collected = score.getScore();
-    }
+        this.difficulty_val = difficulty_val;
 
+        //below saving player data;
+
+    }
+    private void clear_data(){
+        obsid.clear();
+        star.clear();
+        colorSwitcher.clear();
+        difficulty.clear();
+        timeElapsed.clear();
+        cleared.clear();
+    }
     public void saveGame(){
         game_launcher.getDatabase().getDatabaseFiles().add(this);
         try{

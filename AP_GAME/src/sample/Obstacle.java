@@ -22,7 +22,7 @@ public abstract class Obstacle {
     public Group shape_group = new Group();
     protected LinkedList<Shape> shapes = new LinkedList<Shape>();
     protected Star star;
-    double time_of_creation = 0;
+    private double time_of_creation = 0;
     boolean hasStar = false, hasswitch = false;
     private static int id = -1;
     private float difficulty_float = 1.0f;
@@ -55,6 +55,9 @@ public abstract class Obstacle {
     protected void setTimeOfCreation(){
         Date date = new Date();
         time_of_creation = date.getTime();
+    }
+    public double getTime_of_creation(){
+        return time_of_creation;
     }
     protected void setDifficulty_float(float val){
         difficulty_float =val;
@@ -196,6 +199,9 @@ public abstract class Obstacle {
     }
     private void set_cleared(){
         cleared = true;
+    }
+    public void set_cleared(boolean val){
+        cleared = val;
     }
     public void check_cleared(Player_ball pb){
         boolean flag = true;
