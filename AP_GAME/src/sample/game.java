@@ -206,10 +206,10 @@ public class game {
        if(at_0percent(pb)){
            pb.setTranslateY(pb.getTranslateY()-20);
        }
-       shift_frame_to_40();
+       shift_frame_to_60();
     }
-    private void shift_frame_to_40(){
-        double diff  = get_diff_till_40();
+    private void shift_frame_to_60(){
+        double diff  = get_diff_till_60();
         for(Node x: ObstaclePanel.getChildren()){
             x.setTranslateY(x.getTranslateY()+diff);
         }
@@ -223,11 +223,11 @@ public class game {
 
     private void update_obs(){
         Obstacle ob; ob = obs.getFirst();
-        if(at_0percent_obs(ob)){
+        if(at_neg50percent_obs(ob)){
             obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
         }
-        while(obs.size()<3){
+        while(obs.size()<4){
             addobs();
         }
     }
@@ -237,9 +237,9 @@ public class game {
         score_board.render();
     }
 
-    private boolean at_0percent_obs(Obstacle ob){
+    private boolean at_neg50percent_obs(Obstacle ob){
 
-        return (ob.complete_group.localToScene(ob.complete_group.getBoundsInLocal()).getMinY()>theScene.getHeight());
+        return (ob.complete_group.localToScene(ob.complete_group.getBoundsInLocal()).getMinY()>theScene.getHeight()*(3/2));
     }
     private boolean at_0percent(Player_ball pb){
 
@@ -248,8 +248,8 @@ public class game {
     private boolean at_60percent(){
         return (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60);
     }
-    private double get_diff_till_40(){
-        return (-pb.getBoundsInParent().getMaxY()+theScene.getHeight()/2+60);
+    private double get_diff_till_60(){
+        return (-pb.getBoundsInParent().getMaxY()+theScene.getHeight()/2-60);
     }
     private void init_gui(Stage theStage){
         theStage.setTitle( "Color Switch" );
