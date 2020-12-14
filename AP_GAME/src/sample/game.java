@@ -206,8 +206,20 @@ public class game {
        if(at_0percent(pb)){
            pb.setTranslateY(pb.getTranslateY()-20);
        }
+       shift_frame_to_60();
     }
+    private void shift_frame_to_60(){
+        double diff  = get_diff_till_60();
+        for(Node x: ObstaclePanel.getChildren()){
+            x.setTranslateY(x.getTranslateY()+diff);
+        }
 
+        pb.setTranslateY(pb.getTranslateY()+diff);
+        for(Screen_art sc: mobile_gui){
+            sc.translateY(diff);
+            sc.render();
+        }
+    }
 
     private void update_obs(){
         Obstacle ob; ob = obs.getFirst();
@@ -235,6 +247,9 @@ public class game {
     }
     private boolean at_60percent(){
         return (pb.getBoundsInParent().getMaxY()<theScene.getHeight()/2-60);
+    }
+    private double get_diff_till_60(){
+        return (-pb.getBoundsInParent().getMaxY()+theScene.getHeight()/2-60);
     }
     private void init_gui(Stage theStage){
         theStage.setTitle( "Color Switch" );

@@ -120,6 +120,11 @@
             <Font name="Arial" size="84.0" />
          </font>
       </Text>
+      <Text fx:id="noSave" fill="WHITE" layoutX="188.0" layoutY="716.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NO SAVED GAME" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Text>
        
    </children>
 </AnchorPane>
