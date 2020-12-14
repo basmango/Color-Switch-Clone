@@ -1,7 +1,6 @@
 package sample;
 
-import java.awt.image.RasterOp;
-import java.sql.Time;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
@@ -17,7 +16,7 @@ import javafx.scene.shape.*;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
-public  abstract class Obstacle {
+public abstract class Obstacle {
     protected float angular_velocity = 100;
     public Group complete_group = new Group();
     public Group shape_group = new Group();
@@ -25,11 +24,31 @@ public  abstract class Obstacle {
     protected Star star;
     double time_of_creation = 0;
     boolean hasStar = false, hasswitch = false;
+    private static int id = -1;
     private float difficulty_float = 1.0f;
-    protected  ColorSwitcher cs;
+    protected ColorSwitcher cs;
     protected Rectangle boundbox;
+    public void setHasStar(boolean hasStar) {
+        this.hasStar = hasStar;
+    }
+
+    public void setHasswitch(boolean hasswitch) {
+        this.hasswitch = hasswitch;
+    }
+
+    public boolean isHasStar() {
+        return hasStar;
+    }
+
+    public boolean isHasswitch() {
+        return hasswitch;
+    }
+
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
+    }
+    public int getId() {
+        return id;
     }
 
     protected void setTimeOfCreation(){

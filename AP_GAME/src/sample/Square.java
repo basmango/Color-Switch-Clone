@@ -7,7 +7,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
 public class Square extends Obstacle{
-
+    private static int id = 2;
     Square(float difficulty){
         setTimeOfCreation();
         setDifficulty_float(difficulty);

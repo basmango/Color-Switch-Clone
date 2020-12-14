@@ -137,6 +137,9 @@ public class ExitMenu implements Initializable {
     }
     @FXML
     private void mainMenu(MouseEvent mouseEvent) throws IOException {
+        if(game.getInstance().isWasLoaded()){
+            game_launcher.getDatabase().removeData(game.getInstance().getData());
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = (Parent)loader.load();
         MainMenu controller = (MainMenu) loader.getController();
@@ -160,6 +163,9 @@ public class ExitMenu implements Initializable {
 
     @FXML
     private void startGame(MouseEvent mouseEvent) {
+        if(game.getInstance().isWasLoaded()){
+            game_launcher.getDatabase().removeData(game.getInstance().getData());
+        }
         game g = new game();
         g.start_game(stage);
     }

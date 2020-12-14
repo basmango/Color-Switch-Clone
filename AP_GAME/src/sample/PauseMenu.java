@@ -20,14 +20,17 @@ public class PauseMenu implements Initializable {
     @FXML
     private Group save;
     @FXML
+    private Group restart;
+    @FXML
     private Group pause;
     private Stage stage;
+    private DataTable data;
+    private DataBase files;
 
     public void setStage(Stage stage){
         this.stage=stage;
     }
-    @FXML
-    private void mainMenu(MouseEvent mouseEvent) throws IOException {
+    private void loadMainMenu() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = (Parent)loader.load();
         MainMenu controller = (MainMenu) loader.getController();
@@ -36,6 +39,10 @@ public class PauseMenu implements Initializable {
         stage.setTitle("Main Menu");
         stage.setScene(s);
         stage.show();
+    }
+    @FXML
+    private void mainMenu(MouseEvent mouseEvent) throws IOException {
+        loadMainMenu();
     }
     private static void makeScaleTransition(Group p) {
         ScaleTransition st = new ScaleTransition(Duration.seconds(1),p);
@@ -53,5 +60,25 @@ public class PauseMenu implements Initializable {
     }
     public void resumeGame(MouseEvent mouseEvent) {
         game.getInstance().resume_game();
+    }
+
+    public void saveGame(MouseEvent mouseEvent) throws IOException {
+        loadMainMenu();
+        files = game_launcher.getDatabase();
+        if(files.getDatabaseFiles().size()>3){
+            files.removeLast();
+            System.out.println("file should be removed");
+        }
+        data = game.getInstance().updateData();
+        files.removeData(data);
+        data.saveGame();
+    }
+    @FXML
+    private void restartGame(MouseEvent mouseEvent) {
+        if(game.getInstance().isWasLoaded()){
+            game_launcher.getDatabase().removeData(game.getInstance().getData());
+        }
+        game g = new game();
+        g.start_game(stage);
     }
 }

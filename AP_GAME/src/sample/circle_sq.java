@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class circle_sq extends Obstacle {
+    private static int id = 8;
     Group gp1 = new Group();
     double accumulated_time = 0;
     LinkedList<Circle> shapes= new LinkedList<Circle>();

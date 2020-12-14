@@ -21,6 +21,7 @@ public class Horizontal_Bars extends Obstacle {
     private  double time_period = 6;
     private double velocity = 150;
     private int rec_length = 150;
+    private static int id = 0;
     Horizontal_Bars(float difficulty){
         setDifficulty_float(difficulty);
         setTimeOfCreation();

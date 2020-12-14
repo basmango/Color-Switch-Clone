@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Vertical_bars extends Obstacle {
+    private static int id = 7;
     Group gp1 = new Group();
     Group gp2 = new Group();
     LinkedList<Rectangle> shapes= new LinkedList<Rectangle>();

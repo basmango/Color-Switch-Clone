@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenu">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292929" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242520" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Group layoutX="209.0" layoutY="646.0" scaleX="2.2" scaleY="1.5" />
       <Group layoutX="253.0" layoutY="462.0" scaleX="0.7" scaleY="0.7">
          <children>

@@ -9,7 +9,7 @@ import javafx.scene.transform.Rotate;
 import java.util.Random;
 
 public class XWheel extends Obstacle{
-
+    private static int id = 1;
     XWheel(float difficulty){
         setTimeOfCreation();
         setDifficulty_float(difficulty);

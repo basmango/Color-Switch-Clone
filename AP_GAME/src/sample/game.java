@@ -43,7 +43,22 @@ public class game {
     private double obs_vel = 0;
     private float difficulty_increment = 0.05f;
     private float difficulty  = 1f;
-    private boolean isPaused;
+    private DataTable data;
+    double elapsedTime;
+    private boolean wasLoaded = false;
+
+    public DataTable getData() {
+        return data;
+    }
+
+    public boolean isWasLoaded() {
+        return wasLoaded;
+    }
+
+    public void setWasLoaded(boolean wasLoaded) {
+        this.wasLoaded = wasLoaded;
+    }
+
     public Score_board getScore_board() {
         return score_board;
     }
@@ -51,6 +66,14 @@ public class game {
     public void start_game(Stage theStage){
         this.theStage = theStage;
         init_gui(theStage);
+        gameloop();
+    }
+    public void load_a_game(Stage theStage,DataTable d){
+        System.out.println("loading a game");
+        this.theStage = theStage;
+        setWasLoaded(true);
+        data = d;
+        loadGame(d);
         gameloop();
     }
     private void gameloop(){
@@ -61,7 +84,7 @@ public class game {
             public void handle(long currentNanoTime)
             {
                 // calculate time since last update.
-                double elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
+                elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
                 lastNanoTime = currentNanoTime;
 
                 //Rotation
@@ -72,11 +95,7 @@ public class game {
                 if(pb.getLayoutY()>=st_art.getPositionY()-50){
                     pb.setVelocity(0);
                     pb.setLayoutY(st_art.getPositionY()-50);
-                }else if(isPaused){
-                    pb.setVelocity(0);
-                    isPaused = false;
-                }
-                else{
+                } else{
                     // acceleration below
                     pb.addVelocity(3000*elapsedTime);
                 }
@@ -93,8 +112,6 @@ public class game {
                     try {
                         Sound.play_sound("dead");
                         exit_menu();
-                        isPaused = true;
-//                        set_resume_point();
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -116,7 +133,6 @@ public class game {
                     pause_button.Clickcheckdone();
                     try {
                         pause_menu();
-                        isPaused = true;
                         this.stop();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -151,7 +167,6 @@ public class game {
 
     }
     private void exit_menu() throws IOException {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
         Parent root = (Parent)loader.load();
         ExitMenu controller = (ExitMenu) loader.getController();
@@ -189,10 +204,12 @@ public class game {
        }
     }
 
-            private void update_obs(){ Obstacle ob; ob = obs.getFirst(); if(at_0percent_obs(ob)){ obs.remove(ob);
+    private void update_obs(){
+        Obstacle ob; ob = obs.getFirst();
+        if(at_0percent_obs(ob)){
+            obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
         }
-
         while(obs.size()<3){
             addobs();
         }
@@ -219,15 +236,12 @@ public class game {
         gp = new Group();
         st_art = new Start_art();
         score_board = new Score_board();
-       pause_button = new Pause();
+        pause_button = new Pause();
         this.mobile_gui.add(st_art);
         this.immobile_gui.add(pause_button);
-
         ObstaclePanel = new VBox();
         ObstaclePanel.setSpacing(0);
-//        ObstaclePanel.setTranslateY(-300);
         obs= new LinkedList<Obstacle>();
-        //ObstaclePanel.getChildren().add(art);
         pb = new Player_ball();
         pb.setLayoutX(256);
         pb.setLayoutY(500);
@@ -237,9 +251,7 @@ public class game {
         st_art.addto(gp);
         addobs();
         if (obs.getFirst().hascs()) {
-            obs.getFirst().apply_cs(pb,score_board);
-
-
+            obs.getFirst().apply_cs(pb, score_board);
         }
         addobs();
         for (Node nm: ObstaclePanel.getChildren()){
@@ -247,9 +259,7 @@ public class game {
             nm.setTranslateY(-800);
         }
         theScene =new Scene(gp,512,800,Color.web("242520"));
-
         theStage.setScene(theScene);
-
         theScene.setOnKeyReleased(
                 new EventHandler<KeyEvent>()
                 {
@@ -317,5 +327,58 @@ public class game {
             sc.render();
         }
 
+    }
+
+    public DataTable updateData() {
+        data = new DataTable(elapsedTime);
+        data.update(elapsedTime, obs, getScore_board(), pb);
+        game_launcher.getDatabase().addData(data);
+        return data;
+    }
+
+    public void loadGame(DataTable d) {
+        setWasLoaded(true);
+        data = d;
+        System.out.println("updating obstacles");
+        ArrayList<Integer> o = d.getObsid();
+        for(int i=0;i<o.size();i++) {
+            Obstacle ob;
+            float diff = d.getDifficulty().get(i);
+            switch (o.get(i)) {
+                case 0:
+                    ob = new Horizontal_Bars(diff);
+                    break;
+                case 1:
+                    ob = new XWheel(diff);
+                    break;
+                case 2:
+                    ob = new Square(diff);
+                    break;
+                case 3:
+                    ob = new Triangle(diff);
+                    break;
+                case 4:
+                    ob = new Circle_ob(diff);
+                    break;
+                case 5:
+                    ob = new small2circs(diff);
+                    break;
+                case 6:
+                    ob = new concurrent_circles(diff);
+                    break;
+                case 7:
+                    ob = new Vertical_bars(diff);
+                    break;
+                case 8:
+                default:
+                    ob = new circle_sq(diff);
+                    break;
+            }
+            ob.setHasStar(d.getStar().get(i));
+            ob.setHasswitch(d.getColorSwitcher().get(i));
+            obs.add(ob);
+            addtoVbox(ob.complete_group);
+        }
+        elapsedTime = d.getTimeElapsed();
     }
 }

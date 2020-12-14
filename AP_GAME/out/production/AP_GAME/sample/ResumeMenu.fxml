@@ -12,18 +12,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ResumeMenu">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#292929" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
-        <Group layoutX="46.0" layoutY="52.0" scaleX="1.5" scaleY="1.5">
-            <children>
-                <Circle fill="#585858" onMouseClicked="#exitGame" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                <Group layoutX="-15.0" layoutY="-79.0" scaleX="0.1" scaleY="0.1">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" onMouseClicked="#exitGame" rotate="-45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" onMouseClicked="#exitGame" rotate="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
-                    </children>
-                </Group>
-            </children>
-        </Group>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242520" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
         <Text fill="WHITE" layoutX="81.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
             <font>
                 <Font name="Arial" size="84.0" />
@@ -34,131 +23,6 @@
                 <Font name="Arial" size="90.0" />
             </font>
         </Text>
-        <Group fx:id="inner1" layoutX="165.0" layoutY="118.0" scaleX="0.3" scaleY="0.3">
-            <children>
-                <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
-                <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
-                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="30.0" />
-                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
-            </children>
-        </Group>
-        <Group fx:id="inner11" layoutX="299.0" layoutY="118.0" scaleX="0.3" scaleY="0.3">
-            <children>
-                <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
-                <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
-                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="30.0" />
-                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
-            </children>
-        </Group>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="51.0" layoutY="296.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="291.0" layoutY="296.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="51.0" layoutY="551.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-      <Text fill="WHITE" layoutX="99.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 1">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="340.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 2">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="100.0" layoutY="589.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 3">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="123.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <Text fill="#f2ed6e" layoutX="111.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
-         <font>
-            <Font name="Arial" size="25.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="137.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22-Nov-20">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="60.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4:22 AM">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="99.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="147.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="362.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <Text fill="#f2ed6e" layoutX="345.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="59.5859375">
-         <font>
-            <Font name="Arial" size="25.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="338.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="386.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <Text fill="WHITE" layoutX="375.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23-Nov-20">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="298.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9:45 AM">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="135.0" layoutY="746.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15-Dec-20">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="58.0" layoutY="746.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11:15 PM">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="123.0" layoutY="622.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <Text fill="#f2ed6e" layoutX="106.0" layoutY="678.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123" textAlignment="CENTER" wrappingWidth="60.662109375">
-         <font>
-            <Font name="Arial" size="25.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="99.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="147.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
-         <image>
-            <Image url="@../star.png" />
-         </image>
-      </ImageView>
-      <Group layoutX="461.0" layoutY="52.0" />
       <Circle fill="#585858" layoutX="460.0" layoutY="52.0" onMouseClicked="#mainMenu" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="446.0" layoutY="37.0" onMouseClicked="#mainMenu" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -175,5 +39,192 @@
             <Font name="Arial" size="84.0" />
          </font>
       </Text>
+        <Group layoutX="46.0" layoutY="52.0" scaleX="1.5" scaleY="1.5">
+            <children>
+                <Circle fill="#585858" onMouseClicked="#exitGame" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                <Group layoutX="-15.0" layoutY="-79.0" scaleX="0.1" scaleY="0.1">
+                    <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" onMouseClicked="#exitGame" rotate="-45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="157.0" onMouseClicked="#exitGame" rotate="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0" />
+                    </children>
+                </Group>
+            </children>
+        </Group>
+        <Group fx:id="inner1" layoutX="165.0" layoutY="118.0" scaleX="0.3" scaleY="0.3">
+            <children>
+                <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
+                <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
+                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="30.0" />
+                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
+            </children>
+        </Group>
+        <Group fx:id="inner11" layoutX="299.0" layoutY="118.0" scaleX="0.3" scaleY="0.3">
+            <children>
+                <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
+                <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
+                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="90.0" stroke="#8d13fd" strokeLineCap="BUTT" strokeWidth="30.0" />
+                <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
+            </children>
+        </Group>
+      <Group fx:id="game1" layoutX="42.0" layoutY="278.0" onMouseClicked="#loadGame">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+            <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 1">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="80.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="104.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="57.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Text>
+            <Text fx:id="time1" fill="WHITE" layoutX="9.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4:22 AM">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="date1" fill="WHITE" layoutX="102.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22-Nov-20">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group fx:id="game2" layoutX="276.0" layoutY="278.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+            <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 2">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="80.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="104.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="57.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Text>
+            <Text fx:id="time2" fill="WHITE" layoutX="9.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4:22 AM">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="date2" fill="WHITE" layoutX="102.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22-Nov-20">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group fx:id="game3" layoutX="42.0" layoutY="505.0" onMouseClicked="#loadGame">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+            <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 3">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="80.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="104.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="57.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Text>
+            <Text fx:id="time3" fill="WHITE" layoutX="9.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4:22 AM">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="date3" fill="WHITE" layoutX="102.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22-Nov-20">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group fx:id="game4" layoutX="276.0" layoutY="505.0" onMouseClicked="#loadGame">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+            <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 4">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="80.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="104.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="57.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" rotate="30.0" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../star.png" />
+               </image>
+            </ImageView>
+            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Text>
+            <Text fx:id="time4" fill="WHITE" layoutX="9.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4:22 AM">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="date4" fill="WHITE" layoutX="102.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22-Nov-20">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
     </children>
 </AnchorPane>
