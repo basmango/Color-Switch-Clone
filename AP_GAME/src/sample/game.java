@@ -73,7 +73,7 @@ public class game {
         this.theStage = theStage;
         setWasLoaded(true);
         data = d;
-        loadGame(d);
+        loadGame();
         gameloop();
     }
     private void gameloop(){
@@ -129,7 +129,7 @@ public class game {
                         e.printStackTrace();
                     }
                 }
-                if(pause_button.isClicked()){
+                if(pause_button.isClicked() ){
                     pause_button.Clickcheckdone();
                     try {
                         pause_menu();
@@ -271,7 +271,6 @@ public class game {
                     public void handle(KeyEvent e)
                     {
                         String code = e.getCode().toString();
-//                    input.remove( code );
                         input.add( code );
                     }
                 });
@@ -331,7 +330,6 @@ public class game {
             sc.translateY(2);
             sc.render();
         }
-
     }
 
     public DataTable updateData() {
@@ -341,14 +339,12 @@ public class game {
         return data;
     }
 
-    public void loadGame(DataTable d) {
-        setWasLoaded(true);
-        data = d;
+    public void loadGame() {
         System.out.println("updating obstacles");
-        ArrayList<Integer> o = d.getObsid();
+        ArrayList<Integer> o = data.getObsid();
         for(int i=0;i<o.size();i++) {
             Obstacle ob;
-            float diff = d.getDifficulty().get(i);
+            float diff = data.getDifficulty().get(i);
             switch (o.get(i)) {
                 case 0:
                     ob = new Horizontal_Bars(diff);
@@ -379,11 +375,11 @@ public class game {
                     ob = new circle_sq(diff);
                     break;
             }
-            ob.setHasStar(d.getStar().get(i));
-            ob.setHasswitch(d.getColorSwitcher().get(i));
+            ob.setHasStar(data.getStar().get(i));
+            ob.setHasswitch(data.getColorSwitcher().get(i));
             obs.add(ob);
             addtoVbox(ob.complete_group);
         }
-        elapsedTime = d.getTimeElapsed();
+        elapsedTime = data.getTimeElapsed();
     }
 }

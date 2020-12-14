@@ -121,5 +121,10 @@
                 </Text>
             </children>
         </Group>
+      <Text fx:id="cantRevive" fill="WHITE" layoutX="107.0" layoutY="729.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOT ENOUGH STARS TO REVIVE" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

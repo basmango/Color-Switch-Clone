@@ -146,10 +146,29 @@ public class ResumeMenu implements Initializable {
         stage.setScene(s);
         stage.show();
     }
-
-    public void loadGame(MouseEvent mouseEvent){
-//        System.out.println("restart called");
+    @FXML
+    private void loadGame1(MouseEvent mouseEvent){
         game g = new game();
         g.load_a_game(stage,databaseFiles.get(0));
+    }
+    @FXML
+    private void loadGame2(MouseEvent mouseEvent){
+        game g = new game();
+        g.load_a_game(stage,databaseFiles.get(1));
+    }
+    @FXML
+    private void loadGame3(MouseEvent mouseEvent){
+        game g = new game();
+        g.load_a_game(stage,databaseFiles.get(2));
+    }
+    @FXML
+    private void loadGame4(MouseEvent mouseEvent){
+        game g = new game();
+        g.load_a_game(stage,databaseFiles.get(3));
+    }
+    @FXML
+    private void clearGames(MouseEvent mouseEvent) throws IOException {
+        game_launcher.newDatabase();
+        showNone(); 
     }
 }

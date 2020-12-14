@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -20,6 +21,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenu implements Initializable {
+    @FXML
+    private Text noSave;
     @FXML
     private Group arrow;
     @FXML
@@ -39,16 +42,28 @@ public class MainMenu implements Initializable {
     public void setStage(Stage stage){
         this.stage=stage;
     }
+    private void checkForSavedGames() throws NoSavedGameException{
+        if(game_launcher.getDatabase().getDatabaseFiles().size()<1){
+            throw new NoSavedGameException();
+        }
+    }
     @FXML
     private void resumeMenu(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ResumeMenu.fxml"));
-        Parent root = (Parent)loader.load();
-        ResumeMenu controller = (ResumeMenu) loader.getController();
-        controller.setStage(stage);
-        Scene s = new Scene(root, 512, 800);
-        stage.setTitle("Resume Games");
-        stage.setScene(s);
-        stage.show();
+        try {
+            checkForSavedGames();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ResumeMenu.fxml"));
+            Parent root = (Parent)loader.load();
+            ResumeMenu controller = (ResumeMenu) loader.getController();
+            controller.setStage(stage);
+            Scene s = new Scene(root, 512, 800);
+            stage.setTitle("Resume Games");
+            stage.setScene(s);
+            stage.show();
+        } catch (NoSavedGameException e) {
+            noSave.setText("NO SAVED GAME");
+            System.out.println("No saved game in database");
+        }
+
     }
     @FXML
     private void playGame(MouseEvent mouseEvent) {
@@ -85,5 +100,6 @@ public class MainMenu implements Initializable {
         setRotate(inner1, 360);
         setRotate(inner11, -360);
         makeScaleTransition(resume);
+        noSave.setText("");
     }
 }

@@ -13,32 +13,12 @@
 <AnchorPane prefHeight="800.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ResumeMenu">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242520" height="800.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
-        <Text fill="WHITE" layoutX="81.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
-            <font>
-                <Font name="Arial" size="84.0" />
-            </font>
-        </Text>
-        <Text fill="WHITE" layoutX="81.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SWITCH">
-            <font>
-                <Font name="Arial" size="90.0" />
-            </font>
-        </Text>
       <Circle fill="#585858" layoutX="460.0" layoutY="52.0" onMouseClicked="#mainMenu" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="446.0" layoutY="37.0" onMouseClicked="#mainMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../home.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="235.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
-         <font>
-            <Font name="Arial" size="84.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="369.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
-         <font>
-            <Font name="Arial" size="84.0" />
-         </font>
-      </Text>
         <Group layoutX="46.0" layoutY="52.0" scaleX="1.5" scaleY="1.5">
             <children>
                 <Circle fill="#585858" onMouseClicked="#exitGame" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
@@ -50,7 +30,27 @@
                 </Group>
             </children>
         </Group>
-        <Group fx:id="inner1" layoutX="165.0" layoutY="118.0" scaleX="0.3" scaleY="0.3">
+        <Text fill="WHITE" layoutX="81.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+            <font>
+                <Font name="Arial" size="84.0" />
+            </font>
+        </Text>
+        <Text fill="WHITE" layoutX="81.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SWITCH">
+            <font>
+                <Font name="Arial" size="90.0" />
+            </font>
+        </Text>
+      <Text fill="WHITE" layoutX="235.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="369.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
+         <font>
+            <Font name="Arial" size="84.0" />
+         </font>
+      </Text>
+        <Group fx:id="inner1" layoutX="165.0" layoutY="103.0" scaleX="0.3" scaleY="0.3">
             <children>
                 <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
                 <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
@@ -58,7 +58,7 @@
                 <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
             </children>
         </Group>
-        <Group fx:id="inner11" layoutX="299.0" layoutY="118.0" scaleX="0.3" scaleY="0.3">
+        <Group fx:id="inner11" layoutX="299.0" layoutY="103.0" scaleX="0.3" scaleY="0.3">
             <children>
                 <Arc fill="#1f93ff01" layoutX="-56.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="-90.0" stroke="#35e2f2" strokeLineCap="BUTT" strokeWidth="30.0" translateX="-30.0" />
                 <Arc fill="#1f93ff01" layoutX="-86.0" layoutY="108.0" length="90.0" radiusX="100.0" radiusY="100.0" rotate="180.0" stroke="#fd0182" strokeLineCap="BUTT" strokeWidth="30.0" />
@@ -66,7 +66,7 @@
                 <Arc fill="#1f93ff01" layoutX="21.0" layoutY="1.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="#f5df0e" strokeLineCap="BUTT" strokeWidth="30.0" />
             </children>
         </Group>
-      <Group fx:id="game1" layoutX="42.0" layoutY="278.0" onMouseClicked="#loadGame">
+      <Group fx:id="game1" layoutX="46.0" layoutY="231.0" onMouseClicked="#loadGame1">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
             <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 1">
@@ -106,7 +106,7 @@
             </Text>
          </children>
       </Group>
-      <Group fx:id="game2" layoutX="276.0" layoutY="278.0">
+      <Group fx:id="game2" layoutX="280.0" layoutY="231.0" onMouseClicked="#loadGame2">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
             <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 2">
@@ -146,7 +146,7 @@
             </Text>
          </children>
       </Group>
-      <Group fx:id="game3" layoutX="42.0" layoutY="505.0" onMouseClicked="#loadGame">
+      <Group fx:id="game3" layoutX="46.0" layoutY="458.0" onMouseClicked="#loadGame3">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
             <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 3">
@@ -186,7 +186,7 @@
             </Text>
          </children>
       </Group>
-      <Group fx:id="game4" layoutX="276.0" layoutY="505.0" onMouseClicked="#loadGame">
+      <Group fx:id="game4" layoutX="280.0" layoutY="458.0" onMouseClicked="#loadGame4">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#585858" height="170.0" layoutX="8.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
             <Text fill="WHITE" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME 4">
@@ -222,6 +222,20 @@
             <Text fx:id="date4" fill="WHITE" layoutX="102.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22-Nov-20">
                <font>
                   <Font name="Arial" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group fx:id="clear" layoutX="135.0" layoutY="678.0" onMouseClicked="#clearGames" scaleX="0.7" scaleY="0.7">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="274.0" layoutX="-7.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resume.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="19.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CLEAR SAVED GAMES">
+               <font>
+                  <Font name="Arial" size="18.0" />
                </font>
             </Text>
          </children>

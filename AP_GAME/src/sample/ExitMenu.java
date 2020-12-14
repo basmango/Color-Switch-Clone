@@ -22,6 +22,8 @@ import java.util.Scanner;
 
 public class ExitMenu implements Initializable {
     @FXML
+    private Text cantRevive;
+    @FXML
     private Text best_score;
     @FXML
     private Text collected;
@@ -74,11 +76,7 @@ public class ExitMenu implements Initializable {
         rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        score_board = game.getInstance().getScore_board();
-        setCurrent_score(score_board.getScore());
-        score.setText(getCurrent_score()+"");
+    private void update_best_score(){
         //reading best score
         try {
             FileReader obj = new FileReader("best_score.txt");
@@ -104,8 +102,8 @@ public class ExitMenu implements Initializable {
                 e.printStackTrace();
             }
         }
-        best_score.setText(getCurrent_best_score() +"");
-        //reading collected stars
+    }
+    private void reading_collected_score(){
         try {
             FileReader obj = new FileReader("collected_stars.txt");
             Scanner myReader = new Scanner(obj);
@@ -118,28 +116,49 @@ public class ExitMenu implements Initializable {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        //updating and writing collected stars
+    }
+    private void inc_collected_score(){
         try {
             FileWriter myWriter = new FileWriter("collected_stars.txt");
             setCollected_score(getCurrent_score()+getCollected_score());
             myWriter.write(Long.toString(getCollected_score()));
-            collected.setText(getCollected_score()+"");
             myWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
-
+    }
+    private void dec_collected_score() throws NotEnoughStarsException{
+        if((2*getCurrent_score())>getCollected_score()){
+            throw new NotEnoughStarsException();
+        }
+        try {
+            FileWriter myWriter = new FileWriter("collected_stars.txt");
+            setCollected_score(getCollected_score()-2*getCurrent_score());
+            myWriter.write(Long.toString(getCollected_score()));
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        score_board = game.getInstance().getScore_board();
+        setCurrent_score(score_board.getScore());
+        score.setText(getCurrent_score()+"");
+        update_best_score();
+        best_score.setText(getCurrent_best_score() +"");
+        reading_collected_score();
+        collected.setText((getCollected_score()+getCurrent_score())+"");
         setRotate(inner1, 360);
         setRotate(inner11, -360);
         makeScaleTransition(replay);
+        cantRevive.setText("");
     }
     @FXML
     private void mainMenu(MouseEvent mouseEvent) throws IOException {
-        if(game.getInstance().isWasLoaded()){
-            game_launcher.getDatabase().removeData(game.getInstance().getData());
-        }
+        exitingEndGame();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = (Parent)loader.load();
         MainMenu controller = (MainMenu) loader.getController();
@@ -161,17 +180,27 @@ public class ExitMenu implements Initializable {
         st.play();
     }
 
-    @FXML
-    private void startGame(MouseEvent mouseEvent) {
+    private void exitingEndGame(){
+        inc_collected_score();
         if(game.getInstance().isWasLoaded()){
             game_launcher.getDatabase().removeData(game.getInstance().getData());
         }
+    }
+    @FXML
+    private void startGame(MouseEvent mouseEvent) {
+        exitingEndGame();
         game g = new game();
         g.start_game(stage);
     }
 
     @FXML
-    private void restartGame(MouseEvent mouseEvent) {
-        game.getInstance().resume_game();
+    private void restartGame(MouseEvent mouseEvent){
+        try {
+            dec_collected_score();
+            game.getInstance().resume_game();
+        } catch (NotEnoughStarsException e) {
+            cantRevive.setText("NOT ENOUGH STARS TO REVIVE");
+            System.out.println("Not enough stars to revive");
+        }
     }
 }

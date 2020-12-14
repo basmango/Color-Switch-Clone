@@ -64,6 +64,10 @@ public class game_launcher extends Application
     public static DataBase getDatabase(){
         return currentd;
     }
+    public static void newDatabase() throws IOException {
+        currentd = new DataBase();
+        serialize();
+    }
     public static void serialize() throws IOException {
         ObjectOutputStream out=null;
         try {
@@ -79,15 +83,15 @@ public class game_launcher extends Application
 //        System.out.println("deserialized");
         ObjectInputStream in = null;
         try {
-            in=new ObjectInputStream (new FileInputStream("database.txt"));
-            currentd=(DataBase) in.readObject();
+            in = new ObjectInputStream (new FileInputStream("database.txt"));
+            currentd = (DataBase) in.readObject();
             in.close();
         }
         catch (FileNotFoundException e){
-            currentd=new DataBase();
+            currentd = new DataBase();
         }
         catch (NullPointerException e) {
-            currentd=new DataBase();
+            currentd = new DataBase();
             //System.out.println("This user does not exist in the database");
         }
     }

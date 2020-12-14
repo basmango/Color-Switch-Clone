@@ -68,5 +68,34 @@
             </Text>
          </children>
       </Group>
+      <Group fx:id="exception" layoutX="19.0" layoutY="553.0">
+         <children>
+            <Text fill="WHITE" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You would be overwritting your least recent game. Do you want to continue?">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="43.0" fitWidth="173.0" layoutX="27.0" layoutY="36.0" onMouseClicked="#yes" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resume.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="88.0" layoutY="64.0" onMouseClicked="#yes" strokeType="OUTSIDE" strokeWidth="0.0" text="YES">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="70.0" fitWidth="149.0" layoutX="292.0" layoutY="37.0" onMouseClicked="#no" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resume.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="353.0" layoutY="64.0" onMouseClicked="#no" strokeType="OUTSIDE" strokeWidth="0.0" text="NO">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
     </children>
 </AnchorPane>
