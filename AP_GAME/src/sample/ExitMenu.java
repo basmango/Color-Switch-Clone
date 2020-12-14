@@ -154,7 +154,7 @@ public class ExitMenu implements Initializable {
         setRotate(inner1, 360);
         setRotate(inner11, -360);
         makeScaleTransition(replay);
-        cantRevive.setText("");
+        cantRevive.setVisible(false);
     }
     @FXML
     private void mainMenu(MouseEvent mouseEvent) throws IOException {
@@ -199,7 +199,7 @@ public class ExitMenu implements Initializable {
             dec_collected_score();
             game.getInstance().resume_game();
         } catch (NotEnoughStarsException e) {
-            cantRevive.setText("NOT ENOUGH STARS TO REVIVE");
+            cantRevive.setVisible(true);
             System.out.println("Not enough stars to revive");
         }
     }
