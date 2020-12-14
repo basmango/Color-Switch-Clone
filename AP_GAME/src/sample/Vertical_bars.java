@@ -84,7 +84,7 @@ public class Vertical_bars extends Obstacle {
     this.boundbox.setHeight(450);
 
     this.boundbox.setWidth(1200);
-    boundbox.setTranslateY(-20);
+    boundbox.setTranslateY(-70);
     complete_group.setTranslateX(-500);
     populate_groups();
     addStar();

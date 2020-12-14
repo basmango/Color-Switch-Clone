@@ -41,7 +41,7 @@ public class game {
     private VBox ObstaclePanel;
     private Player_ball pb;
     private double obs_vel = 0;
-    private float difficulty_increment = 0.05f;
+    private float difficulty_increment = 0.025f;
     private float difficulty  = 1f;
     private DataTable data;
     double elapsedTime;
@@ -184,6 +184,7 @@ public class game {
     }
     private boolean check_collisions(){
         for(Obstacle ob : obs){
+            ob.check_cleared(pb);
             if(ob.check_collision(pb)){
                 translate_to_safe(ob);
                 return true;
@@ -196,13 +197,17 @@ public class game {
         return false;
     }
     private void translate_to_safe(Obstacle ob){
-       if(ob.hasStar){
+       if(!ob.isCleared()){
            ob.check_bound_collision(pb,1);
        }
-       else{
+       else {
            ob.check_bound_collision(pb,-1);
        }
+       if(at_0percent(pb)){
+           pb.setTranslateY(pb.getTranslateY()-20);
+       }
     }
+
 
     private void update_obs(){
         Obstacle ob; ob = obs.getFirst();

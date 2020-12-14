@@ -28,6 +28,7 @@ public abstract class Obstacle {
     private float difficulty_float = 1.0f;
     protected ColorSwitcher cs;
     protected Rectangle boundbox;
+    private boolean cleared = false;
     public void setHasStar(boolean hasStar) {
         this.hasStar = hasStar;
     }
@@ -189,6 +190,19 @@ public abstract class Obstacle {
         }
 
 //        System.out.println("test");
+        }
+    public boolean isCleared() {
+    return cleared;
+    }
+    private void set_cleared(){
+        cleared = true;
+    }
+    public void check_cleared(Player_ball pb){
+        boolean flag = true;
+        if (complete_group.getBoundsInParent().getMinY()>pb.getBoundsInParent().getMaxY())
+        {
+            set_cleared();
+        }
         }
 
 

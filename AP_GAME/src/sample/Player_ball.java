@@ -7,14 +7,15 @@ public class Player_ball extends Circle {
     private double velocity;
     private boolean isFrozen = true;
     private final double jumpval= -650;
+    private double max_height = 0;
     Player_ball(){
         super(17, Color.web("0xFF0082",1.0));
         velocity = 0;
 
     }
-//    piblic void accelerate(){
-//
-//    }
+    public double getMax_height(){
+        return max_height;
+    }
     public void freeze(){
         this.isFrozen = true;
     }
@@ -29,7 +30,10 @@ public class Player_ball extends Circle {
         this.velocity = v;
     }
     public void update(double ti){
-        if(!this.isFrozen)this.setLayoutY(this.getLayoutY()+velocity*ti);
+        if(!this.isFrozen){
+            this.setLayoutY(this.getLayoutY()+velocity*ti);
+            if(this.getLayoutY()<max_height)max_height = this.getLayoutY();
+        }
     }
 
     public void jump(){
