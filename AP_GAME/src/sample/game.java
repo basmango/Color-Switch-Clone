@@ -223,11 +223,11 @@ public class game {
 
     private void update_obs(){
         Obstacle ob; ob = obs.getFirst();
-        if(at_neg50percent_obs(ob)){
+        if(at_neg100percent_obs(ob)){
             obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
         }
-        while(obs.size()<4){
+        while(obs.size()<10){
             addobs();
         }
     }
@@ -237,9 +237,9 @@ public class game {
         score_board.render();
     }
 
-    private boolean at_neg50percent_obs(Obstacle ob){
+    private boolean at_neg100percent_obs(Obstacle ob){
 
-        return (ob.complete_group.localToScene(ob.complete_group.getBoundsInLocal()).getMinY()>theScene.getHeight()*(3/2));
+        return (ob.complete_group.localToScene(ob.complete_group.getBoundsInLocal()).getMinY()>theScene.getHeight()*(2));
     }
     private boolean at_0percent(Player_ball pb){
 
