@@ -227,7 +227,7 @@ public class game {
             obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
         }
-        while(obs.size()<10){
+        while(obs.size()<6){
             addobs();
         }
     }
