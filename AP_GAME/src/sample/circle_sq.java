@@ -15,7 +15,11 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class circle_sq extends Obstacle {
-    private static int id = 8;
+    @Override
+    public int getId() {
+        return -1;
+    }
+
     Group gp1 = new Group();
     double accumulated_time = 0;
     LinkedList<Circle> shapes= new LinkedList<Circle>();
@@ -61,11 +65,13 @@ public class circle_sq extends Obstacle {
         }
         else if(time >= 3*(time_period)/4){
             c.setTranslateY((time_period/4)*velocity  - velocity* seg);
+            c.setTranslateX(0);
 //            System.out.println("Last");
         }
         else if(time >= time_period/2 ){
             c.setTranslateX((time_period/4)*velocity - velocity * seg);
-//            System.out.println("Second Last");
+            c.setTranslateY((time_period/4)*velocity);
+            //            System.out.println("Second Last");
         }
 
     }
@@ -146,6 +152,7 @@ public class circle_sq extends Obstacle {
 
         this.boundbox.setWidth(side_length + side_length/2);
 //        boundbox.setTranslateY(50);
+
         complete_group.setTranslateX(110);
         populate_groups();
         addStar();

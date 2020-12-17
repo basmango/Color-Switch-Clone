@@ -41,4 +41,29 @@ public class Player_ball extends Circle {
         this.setVelocity(jumpval);
         Sound.play_sound("jump");
     }
+    public int get_code(){
+        if(this.getFill().equals(Color.web("0xFF0082"))){
+          return 0;
+        }
+        if(this.getFill().equals(Color.web("0x8D13FA"))){
+            return 1;
+        }
+        if(this.getFill().equals(Color.web("0x35E2F2"))){
+            return 2;
+        }
+        if(this.getFill().equals(Color.web("0xF5DF0D"))){
+            return 3;
+        }
+        return -1;
+    }
+    public static Color get_code(int val){
+        return switch (val) {
+            case 0 -> Color.web("0xFF0082");
+            case 1 -> Color.web("0x8D13FA");
+            case 2 -> Color.web("0x35E2F2");
+            case 3 -> Color.web("0xF5DF0D");
+            default -> null;
+        };
+    }
+
 }

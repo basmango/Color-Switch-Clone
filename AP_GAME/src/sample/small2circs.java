@@ -14,7 +14,9 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
 public  class small2circs extends Obstacle{
-    private static int id = 5;
+    public int getId(){
+        return 5;
+    }
     public Group shape_group = new Group();
     public Group shape_group2 = new Group();
     private LinkedList<Shape> shapes = new LinkedList<Shape>();

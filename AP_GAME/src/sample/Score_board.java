@@ -30,6 +30,9 @@ public class Score_board extends Screen_art
         gc.clearRect(0, 0, 100, 200);
         gc.fillText(score+"",0,45);
     }
+    public void setScore(int score){
+        this.score  = score;
+        }
     public void increment(){
         score++;
     }

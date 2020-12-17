@@ -24,17 +24,22 @@ public abstract class Obstacle {
     protected Star star;
     private double time_of_creation = 0;
     boolean hasStar = false, hasswitch = false;
-    private static int id = -1;
     private float difficulty_float = 1.0f;
     protected ColorSwitcher cs;
     protected Rectangle boundbox;
     private boolean cleared = false;
     public void setHasStar(boolean hasStar) {
         this.hasStar = hasStar;
+        if(hasStar){
+            star.render();
+        }
     }
 
     public void setHasswitch(boolean hasswitch) {
         this.hasswitch = hasswitch;
+        if(!hasswitch){
+            if(cs!=null)cs.setDisabled();
+        }
     }
 
     public boolean isHasStar() {
@@ -48,9 +53,7 @@ public abstract class Obstacle {
     public void assign_group (Pane x){
         x.getChildren().add(0,shape_group);
     }
-    public int getId() {
-        return id;
-    }
+    public abstract int getId(); 
 
     protected void setTimeOfCreation(){
         Date date = new Date();
@@ -170,9 +173,12 @@ public abstract class Obstacle {
     }
     protected void chance_add_switcher(){
         Random rand = new Random();
-        if(rand.nextInt(2)==1) {
+//        if(rand.nextInt(2)==1) {
             add_color_switcher();
-        }
+//        this.hasswitch = true;
+//        }else{
+//            this.hasswitch = false;
+//        }
 
     }
     protected void render_collectibles(){

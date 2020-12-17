@@ -12,7 +12,9 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Vertical_bars extends Obstacle {
-    private static int id = 7;
+    public int getId(){
+        return 7;
+    }
     Group gp1 = new Group();
     Group gp2 = new Group();
     LinkedList<Rectangle> shapes= new LinkedList<Rectangle>();
@@ -30,7 +32,7 @@ public class Vertical_bars extends Obstacle {
     @Override
     public void motion(double elapsedtime) {
         accumulated+=elapsedtime;
-        if(accumulated > time_period)accumulated -= time_period;
+        if(accumulated > time_period)accumulated = accumulated  % time_period;
         gp1.setTranslateX(amplitude*Math.sin((360/time_period)*getDifficulity_float()*accumulated));
         gp2.setTranslateX(-amplitude*Math.sin((360/time_period)*getDifficulity_float()*accumulated-180));
 
@@ -56,7 +58,7 @@ public class Vertical_bars extends Obstacle {
         Color[] colors  = new Color[]{Color.web("0xFF0082"),Color.web("0x8D13FA"),Color.web("0x35E2F2"),Color.web("0xF5DF0D")};
         ArrayList<Color> col= new ArrayList<>();
         for(Color c : colors)col.add(c);
-        Collections.shuffle(col);
+//        Collections.shuffle(col);
         s1 = this.add_rounded_rect(22,max_size - diff*1,col.get(0));
         s2 = this.add_rounded_rect(20,max_size - diff*2,col.get(1));
         s3 = this.add_rounded_rect(18,max_size - diff*3,col.get(2));

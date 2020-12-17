@@ -14,6 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
@@ -45,6 +46,7 @@ public class game {
     private float difficulty  = 1f;
     private DataTable data;
     double elapsedTime;
+    private double pause_time;
     private boolean wasLoaded = false;
 
     public DataTable getData() {
@@ -73,17 +75,24 @@ public class game {
         this.theStage = theStage;
         setWasLoaded(true);
         data = d;
+
+        init_gui(theStage);
+        resume_initialization();
         loadGame();
         gameloop();
+
     }
     private void gameloop(){
         input = new ArrayList<String>();
-        new AnimationTimer() {
-            long lastNanoTime = System.nanoTime();
-            public void handle(long currentNanoTime) {
+
+        new AnimationTimer()
+        {   long lastNanoTime = System.nanoTime();
+            public void handle(long currentNanoTime)
+            {
                 // calculate time since last update.
                 elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
                 lastNanoTime = currentNanoTime;
+
                 //Rotation
                 animate_obs(elapsedTime);
                 while (at_60percent()){
@@ -96,6 +105,8 @@ public class game {
                     // acceleration below
                     pb.addVelocity(3000*elapsedTime);
                 }
+
+
                 if (input.contains("SPACE")){
                     pb.unfreeze();
                     pb.jump();
@@ -137,12 +148,15 @@ public class game {
             }
         }.start();
 //        System.out.println("testend");
+        System.out.println("test5");
         theStage.show();
     }
 //    private void set_resume_point(){
 //        obs.
 //    }
     private void pause_menu() throws IOException {
+        Date date = new Date();
+        pause_time = date.getTime();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseMenu.fxml"));
         Parent root = (Parent)loader.load();
         PauseMenu controller = (PauseMenu) loader.getController();
@@ -151,11 +165,15 @@ public class game {
         theStage.setTitle("Pause Game");
         theStage.setScene(s);
         theStage.show();
+
+
     }
     public void resume_game(){
         this.theStage.setScene(theScene);
         pb.freeze();
         gameloop();
+
+
     }
     private void exit_menu() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
@@ -184,6 +202,7 @@ public class game {
                  difficulty+=difficulty_increment;
              }
         }
+
         return false;
     }
     private void translate_to_safe(Obstacle ob){
@@ -217,7 +236,7 @@ public class game {
             obs.remove(ob);
             ObstaclePanel.getChildren().remove(ob);
         }
-        while(obs.size()<6){
+        while(obs.size()<7){
             addobs();
         }
     }
@@ -255,7 +274,9 @@ public class game {
         pb = new Player_ball();
         pb.setLayoutX(256);
         pb.setLayoutY(500);
+        ObstaclePanel.setMinSize(1000, 800);
         gp.getChildren().addAll(ObstaclePanel,pb);
+
         pause_button.addto(gp);
         score_board.addto(gp);
         st_art.addto(gp);
@@ -266,7 +287,7 @@ public class game {
         addobs();
         for (Node nm: ObstaclePanel.getChildren()){
 //            nm.setLayoutX(256);
-            nm.setTranslateY(-800);
+            nm.setLayoutY(-1200);
         }
         theScene =new Scene(gp,512,800,Color.web("242520"));
         theStage.setScene(theScene);
@@ -282,14 +303,17 @@ public class game {
 
         for(Screen_art sc : immobile_gui) sc.render();
         for(Screen_art sc: mobile_gui) sc.render();
+        System.out.println("test4");
     }
 
     private void addobs(){
-        ObstacleFactory o = new ObstacleFactory();
         Random random = new Random();
-        Obstacle ob = o.getObstacle(random.nextInt(9), difficulty);
+        ObstacleFactory o = new ObstacleFactory();
+        Obstacle ob = o.getObstacle(random.nextInt(9),difficulty);
         obs.add(ob);
         addtoVbox(ob.complete_group);
+
+
     }
     private void addtoVbox(Node addition){
         double max = 0;
@@ -305,6 +329,7 @@ public class game {
         for(Node x: ObstaclePanel.getChildren()){
             x.setTranslateY(x.getTranslateY()+2);
         }
+
         pb.setTranslateY(pb.getTranslateY()+2);
         for(Screen_art sc: mobile_gui){
             sc.translateY(2);
@@ -314,26 +339,116 @@ public class game {
 
     public DataTable updateData() {
         data = new DataTable();
-        data.update( obs, getScore_board(), pb,difficulty);
+        data.update( obs, getScore_board(), pb,difficulty,pause_time,st_art.gc.getCanvas().getLayoutY());
         game_launcher.getDatabase().addData(data);
         return data;
     }
 
     public void loadGame() {
+        System.out.println("test");
         System.out.println("updating obstacles");
         ArrayList<Integer> o = data.getObsid();
+       int  size  = o.size()-1;
         ObstacleFactory factory = new ObstacleFactory();
-        for(int i=0;i<o.size();i++) {
+        for(int i=0;i<=size;i++) {
             float diff = data.getDifficulty().get(i);
             Obstacle ob = factory.getObstacle(o.get(i),diff);
-            difficulty = data.getDifficulty_val();
             ob.setHasStar(data.getStar().get(i));
             ob.setHasswitch(data.getColorSwitcher().get(i));
+            //setting obstacle properties;
+            if(!data.getStar().get(i)){
+                ob.star.setDisabled();
+                ob.setHasStar(false);
+            }
+            if(data.getColorSwitcher().get(i)){
+                if(!ob.hascs()){
+                    ob.add_color_switcher();
+                    ob.setHasswitch(true );
+                }
+            }
+            else{
+                if(ob.hascs()){
+                    ob.cs.setDisabled();
+                    ob.setHasswitch(false);
+                }
+            }
+            System.out.println(data.getCleared());
             ob.set_cleared(data.getCleared().get(i));
+
             ob.motion(data.getTimeElapsed().get(i));
-            ob.complete_group.setTranslateY(data.getYcoords().get(i));
-            obs.add(ob);
             addtoVbox(ob.complete_group);
+//            ob.complete_group.setTranslateY(data.getYcoordstrans().get(i));
+            ob.complete_group.setLayoutY((data.getYcoords().get(i)));
+            obs.add(ob);
         }
+        pb.setFill(Player_ball.get_code(data.get_color_code()));
+        pb.setLayoutY(data.getYcoordBall());
+        st_art.gc.getCanvas().setLayoutY(data.get_art_pos());
+
+//             setting game and scoreboard properties;
+            difficulty = data.getDifficulty_val();
+//            //setting playerball properties;
+        System.out.println("code " + data.get_color_code());
+
+//            for(Obstacle ob : obs){
+//            ob.complete_group.setTranslateY(ob.complete_group.getTranslateY()-800);
+//            }
+
+//            check_collisions();
+//            shiftby(getTranslateValNeeded(getFirstunClearedObs()));
+            score_board.setScore(data.getStars_collected());
+//            System.out.println("test2");
     }
+    private void shiftby(double val){
+        for(Obstacle ob : obs){
+           // ob.complete_group.setTranslateY(ob.complete_group.getTranslateY() - val);
+        }
+
+    }
+    private double getTranslateValNeeded(Obstacle ob){
+        return pb.getLayoutY()-ob.complete_group.getBoundsInParent().getMaxY();
+
+    }
+    private Obstacle getFirstunClearedObs(){
+        for(Obstacle o : obs){
+            if (!o.isCleared())return o;
+        }
+        return null;
+    }
+    private void resume_initialization(){
+        theStage.setTitle( "Color Switch" );
+        gp = new Group();
+        st_art = new Start_art();
+        score_board = new Score_board();
+        pause_button = new Pause();
+        this.mobile_gui.add(st_art);
+        this.immobile_gui.add(pause_button);
+        ObstaclePanel = new VBox();
+        ObstaclePanel.setMinSize(1000,800);
+        ObstaclePanel.setSpacing(0);
+        obs= new LinkedList<Obstacle>();
+        pb = new Player_ball();
+        pb.setLayoutX(256);
+        pb.setLayoutY(500);
+        gp.getChildren().addAll(ObstaclePanel,pb);
+        pause_button.addto(gp);
+        score_board.addto(gp);
+        st_art.addto(gp);
+
+        theScene =new Scene(gp,512,800,Color.web("242520"));
+        theStage.setScene(theScene);
+        theScene.setOnKeyReleased(
+                new EventHandler<KeyEvent>()
+                {
+                    public void handle(KeyEvent e)
+                    {
+                        String code = e.getCode().toString();
+                        input.add( code );
+                    }
+                });
+        for(Screen_art sc : immobile_gui) sc.render();
+        for(Screen_art sc: mobile_gui) sc.render();
+        System.out.println("test4");
+    }
+
 }

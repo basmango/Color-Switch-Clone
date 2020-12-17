@@ -14,6 +14,9 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Horizontal_Bars extends Obstacle {
+    public int getId(){
+        return 0;
+    }
     Group gp1 = new Group();
 
     LinkedList<Rectangle> shapes= new LinkedList<Rectangle>();

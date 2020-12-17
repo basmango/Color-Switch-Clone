@@ -7,7 +7,9 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
 public class Triangle extends Obstacle{
-    private static int id = 3;
+    public int getId(){
+        return 3;
+    }
     Triangle(float difficulty){
         setDifficulty_float(difficulty);
         setTimeOfCreation();

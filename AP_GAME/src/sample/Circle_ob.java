@@ -5,7 +5,11 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 
 public class Circle_ob extends Obstacle{
-    private static int id = 4;
+
+    @Override
+    public int getId() {
+        return 4;
+    }
     Circle_ob(float difficulty){
         setTimeOfCreation();
         setDifficulty_float(difficulty);

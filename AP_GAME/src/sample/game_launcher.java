@@ -1,10 +1,9 @@
 package sample;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.scene.image.ImageView;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -12,28 +11,33 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 
 import java.io.*;
-import java.nio.file.Paths;
-import java.util.Timer;
-import java.util.TimerTask;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import javafx.scene.Parent;
 // Collect the Money Bags!
 
 import javafx.scene.control.Button;
-import javafx.util.Duration;
 
 public class game_launcher extends Application
 {
     private static DataBase currentd;
-    private static final int COUNT_LIMIT = 500000;
-    private static void main(String[] args) {
+
+    private static void main(String[] args)
+    {
         launch(args);
     }
-
     public void start(Stage theStage) throws IOException, ClassNotFoundException {
         theStage.setMaxHeight(800);
         theStage.setMaxWidth(512);
@@ -47,13 +51,9 @@ public class game_launcher extends Application
             System.out.println(e.getMessage());
 
         }
-
-
-
     }
 
     public void show_main_menu(Stage stage) throws Exception{
-
         MediaPlayer player = new MediaPlayer(new Media(new File("yay2.mp4").toURI().toString()));
         player.setOnEndOfMedia(new Runnable() {
             public void run() {
@@ -80,14 +80,13 @@ public class game_launcher extends Application
         stage.setTitle("splash");
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static DataBase getDatabase(){
         return currentd;
     }
     public static void newDatabase() throws IOException {
-        currentd = getDatabase();
+        currentd = DataBase.getInstance();
         serialize();
     }
     public static void serialize() throws IOException {
@@ -106,14 +105,14 @@ public class game_launcher extends Application
         ObjectInputStream in = null;
         try {
             in = new ObjectInputStream (new FileInputStream("database.txt"));
-            currentd = (DataBase) in.readObject();
+            currentd = (DataBase) in. readObject();
             in.close();
         }
         catch (FileNotFoundException e){
-            currentd = getDatabase();
+            currentd = DataBase.getInstance();
         }
         catch (NullPointerException e) {
-            currentd = getDatabase();
+            currentd = DataBase.getInstance();
             //System.out.println("This user does not exist in the database");
         }
     }

@@ -22,17 +22,33 @@ public class DataTable implements Serializable {
     private ArrayList<Float> difficulty;
     private ArrayList<Double> timeElapsed;
     private ArrayList<Double> Ycoords;
+    private ArrayList<Double> Ycoordstrans;
     private String date;
     private String time;
-
-    private long stars_collected;
+    private int ball_color_code;
+    private double YcoordBall;
+    private int stars_collected;
     private float difficulty_val;
-    public long getStars_collected() {
+    private double next_obs;
+    private double art_pos;
+    private double max_dist_val;
+    public double get_art_pos(){
+        return art_pos;
+    }
+    public int getStars_collected() {
         return stars_collected;
     }
-
+    public int get_color_code(){
+        return ball_color_code;
+    }
+    public double getYcoordBall(){
+        return YcoordBall;
+    }
     public String getDate() {
         return date;
+    }
+    public double getMsx(){
+        return max_dist_val;
     }
 
     public String getTime() {
@@ -63,6 +79,9 @@ public class DataTable implements Serializable {
     public ArrayList<Double> getYcoords(){
         return Ycoords;
     }
+    public ArrayList<Double> getYcoordstrans(){
+        return Ycoordstrans;
+    }
     public float getDifficulty_val(){
         return difficulty_val;
     }
@@ -82,23 +101,31 @@ public class DataTable implements Serializable {
         this.timeElapsed = new ArrayList<>();
         this.cleared = new ArrayList<>();
         this.Ycoords = new ArrayList<>();
+        this.Ycoordstrans = new ArrayList<>();
 
     }
 
-    public void update(LinkedList<Obstacle> obs, Score_board score, Player_ball pb,float difficulty_val) {
+    public void update(LinkedList<Obstacle> obs, Score_board score, Player_ball pb,float difficulty_val,double t,double pos_art) {
         clear_data();
+
         for(int i=0;i<obs.size();i++){
             obsid.add(obs.get(i).getId());
             star.add(obs.get(i).isHasStar());
             colorSwitcher.add(obs.get(i).isHasswitch());
             difficulty.add(obs.get(i).getDifficulity_float());
-            timeElapsed.add(obs.get(i).getTime_of_creation());
+            timeElapsed.add(t-obs.get(i).getTime_of_creation());
             cleared.add(obs.get(i).isCleared());
-            Ycoords.add(obs.get(i).complete_group.getTranslateY());
+            Ycoords.add(obs.get(i).complete_group.getLayoutY());
+            Ycoordstrans.add(obs.get(i).complete_group.getTranslateY());
+
             }
+
+
         this.stars_collected = score.getScore();
         this.difficulty_val = difficulty_val;
-
+        this.ball_color_code = pb.get_code();
+        this.YcoordBall = pb.getLayoutY();
+        this.art_pos = pos_art;
         //below saving player data;
 
     }
