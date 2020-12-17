@@ -78,15 +78,12 @@ public class game {
     }
     private void gameloop(){
         input = new ArrayList<String>();
-
-        new AnimationTimer()
-        {   long lastNanoTime = System.nanoTime();
-            public void handle(long currentNanoTime)
-            {
+        new AnimationTimer() {
+            long lastNanoTime = System.nanoTime();
+            public void handle(long currentNanoTime) {
                 // calculate time since last update.
                 elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
                 lastNanoTime = currentNanoTime;
-
                 //Rotation
                 animate_obs(elapsedTime);
                 while (at_60percent()){
@@ -99,8 +96,6 @@ public class game {
                     // acceleration below
                     pb.addVelocity(3000*elapsedTime);
                 }
-
-
                 if (input.contains("SPACE")){
                     pb.unfreeze();
                     pb.jump();
@@ -156,15 +151,11 @@ public class game {
         theStage.setTitle("Pause Game");
         theStage.setScene(s);
         theStage.show();
-
-
     }
     public void resume_game(){
         this.theStage.setScene(theScene);
         pb.freeze();
         gameloop();
-
-
     }
     private void exit_menu() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ExitMenu.fxml"));
@@ -193,7 +184,6 @@ public class game {
                  difficulty+=difficulty_increment;
              }
         }
-
         return false;
     }
     private void translate_to_safe(Obstacle ob){
@@ -295,35 +285,11 @@ public class game {
     }
 
     private void addobs(){
+        ObstacleFactory o = new ObstacleFactory();
         Random random = new Random();
-        Obstacle ob;
-        switch(random.nextInt(9)){
-            case 0: ob = new Horizontal_Bars(difficulty);
-                break;
-            case 1: ob = new XWheel(difficulty);
-                break;
-            case 2: ob = new Square(difficulty);
-                break;
-            case 3: ob = new Triangle(difficulty);
-                break;
-            case 4: ob = new Circle_ob(difficulty);
-                break;
-            case 5: ob= new small2circs(difficulty);
-                   break;
-            case 6: ob= new concurrent_circles(difficulty);
-                    break;
-            case 7: ob  = new Vertical_bars(difficulty);
-                    break;
-            case 8:
-            default: ob  = new circle_sq(difficulty);
-                    break;
-
-        }
-
+        Obstacle ob = o.getObstacle(random.nextInt(9), difficulty);
         obs.add(ob);
         addtoVbox(ob.complete_group);
-
-
     }
     private void addtoVbox(Node addition){
         double max = 0;
@@ -339,7 +305,6 @@ public class game {
         for(Node x: ObstaclePanel.getChildren()){
             x.setTranslateY(x.getTranslateY()+2);
         }
-
         pb.setTranslateY(pb.getTranslateY()+2);
         for(Screen_art sc: mobile_gui){
             sc.translateY(2);
@@ -357,20 +322,10 @@ public class game {
     public void loadGame() {
         System.out.println("updating obstacles");
         ArrayList<Integer> o = data.getObsid();
+        ObstacleFactory factory = new ObstacleFactory();
         for(int i=0;i<o.size();i++) {
-            Obstacle ob;
             float diff = data.getDifficulty().get(i);
-            ob = switch (o.get(i)) {
-                case 0 -> new Horizontal_Bars(diff);
-                case 1 -> new XWheel(diff);
-                case 2 -> new Square(diff);
-                case 3 -> new Triangle(diff);
-                case 4 -> new Circle_ob(diff);
-                case 5 -> new small2circs(diff);
-                case 6 -> new concurrent_circles(diff);
-                case 7 -> new Vertical_bars(diff);
-                default -> new circle_sq(diff);
-            };
+            Obstacle ob = factory.getObstacle(o.get(i),diff);
             difficulty = data.getDifficulty_val();
             ob.setHasStar(data.getStar().get(i));
             ob.setHasswitch(data.getColorSwitcher().get(i));

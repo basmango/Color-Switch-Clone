@@ -80,24 +80,6 @@ public class game_launcher extends Application
         stage.setTitle("splash");
         stage.setScene(scene);
         stage.show();
-//        Image image = null;
-//        try {
-//            image = new Image(new FileInputStream("yay2.gif"));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        ImageView imageView = new ImageView(image);
-//        imageView.setFitHeight(800);
-//        imageView.setFitWidth(512);
-//        imageView.setPreserveRatio(true);
-//        Group roo = new Group(imageView);
-//        Scene scene = new Scene(roo, 512, 800);
-//        stage.setTitle("Splash screen");
-//        stage.setScene(scene);
-//        stage.show();
-//        PauseTransition pause = new PauseTransition(Duration.minutes(1));
-//        pause.play();
-
 
     }
 
@@ -105,7 +87,7 @@ public class game_launcher extends Application
         return currentd;
     }
     public static void newDatabase() throws IOException {
-        currentd = new DataBase();
+        currentd = getDatabase();
         serialize();
     }
     public static void serialize() throws IOException {
@@ -128,10 +110,10 @@ public class game_launcher extends Application
             in.close();
         }
         catch (FileNotFoundException e){
-            currentd = new DataBase();
+            currentd = getDatabase();
         }
         catch (NullPointerException e) {
-            currentd = new DataBase();
+            currentd = getDatabase();
             //System.out.println("This user does not exist in the database");
         }
     }

@@ -5,11 +5,16 @@ import java.util.ArrayList;
 
 public class DataBase implements Serializable {
     private static final long serialVersionUID=72L;
-    private static DataBase d;
+    private static DataBase d = null;
 
     private ArrayList<DataTable> databaseFiles;
-
-    public DataBase() {
+    public static DataBase getInstance(){
+        if(d == null){
+            d = new DataBase();
+        }
+        return d;
+    }
+    private DataBase() {
         databaseFiles = new ArrayList<DataTable>();
     }
 
