@@ -3,8 +3,7 @@ import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Rectangle2D;
 
-public class Start_art extends Screen_art
-{
+public class Start_art extends Screen_art {
     private Image image_finger;
     Start_art() {
         super(512,200);
@@ -26,7 +25,7 @@ public class Start_art extends Screen_art
 
     @Override
     public void render() {
-        gc.drawImage(image_primary,0,0);
+//        gc.drawImage(image_primary,0,0);
         gc.drawImage(image_finger,75,50);
 
     }

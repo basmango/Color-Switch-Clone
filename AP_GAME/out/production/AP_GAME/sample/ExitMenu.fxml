@@ -121,9 +121,9 @@
                 </Text>
             </children>
         </Group>
-      <Text fx:id="cantRevive" fill="WHITE" layoutX="107.0" layoutY="729.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOT ENOUGH STARS TO REVIVE" textAlignment="CENTER">
+      <Text fx:id="cantRevive" fill="WHITE" layoutX="26.0" layoutY="728.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You need double your score to revive. Not enough collected stars to revive." textAlignment="CENTER">
          <font>
-            <Font name="Arial" size="19.0" />
+            <Font name="Arial" size="14.0" />
          </font>
       </Text>
     </children>

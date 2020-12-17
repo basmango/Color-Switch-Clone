@@ -1,40 +1,39 @@
 package sample;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
+
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.nio.file.Paths;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.scene.Parent;
 // Collect the Money Bags!
 
 import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 public class game_launcher extends Application
 {
     private static DataBase currentd;
-
-    private static void main(String[] args)
-    {
+    private static final int COUNT_LIMIT = 500000;
+    private static void main(String[] args) {
         launch(args);
     }
+
     public void start(Stage theStage) throws IOException, ClassNotFoundException {
         theStage.setMaxHeight(800);
         theStage.setMaxWidth(512);
@@ -48,17 +47,58 @@ public class game_launcher extends Application
             System.out.println(e.getMessage());
 
         }
+
+
+
     }
 
     public void show_main_menu(Stage stage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-        Parent root = (Parent)loader.load();
-        MainMenu controller = (MainMenu) loader.getController();
-        controller.setStage(stage);
-        Scene s = new Scene(root, 512, 800);
-        stage.setTitle("Main Menu");
-        stage.setScene(s);
+
+        MediaPlayer player = new MediaPlayer(new Media(new File("yay2.mp4").toURI().toString()));
+        player.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+                Parent root = null;
+                try {
+                    root = (Parent)loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                MainMenu controller = (MainMenu) loader.getController();
+                controller.setStage(stage);
+                Scene s = new Scene(root, 512, 800);
+                stage.setTitle("Main Menu");
+                stage.setScene(s);
+                stage.show();
+            }
+        });
+        MediaView mediaView = new MediaView(player);
+        player.setAutoPlay(true);
+        Group roo = new Group();
+        roo.getChildren().add(mediaView);
+        Scene scene = new Scene(roo,512,800);
+        stage.setTitle("splash");
+        stage.setScene(scene);
         stage.show();
+//        Image image = null;
+//        try {
+//            image = new Image(new FileInputStream("yay2.gif"));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        ImageView imageView = new ImageView(image);
+//        imageView.setFitHeight(800);
+//        imageView.setFitWidth(512);
+//        imageView.setPreserveRatio(true);
+//        Group roo = new Group(imageView);
+//        Scene scene = new Scene(roo, 512, 800);
+//        stage.setTitle("Splash screen");
+//        stage.setScene(scene);
+//        stage.show();
+//        PauseTransition pause = new PauseTransition(Duration.minutes(1));
+//        pause.play();
+
+
     }
 
     public static DataBase getDatabase(){
