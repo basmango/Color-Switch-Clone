@@ -89,7 +89,7 @@
                   <Image url="@../star.png" />
                </image>
             </ImageView>
-            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+            <Text fx:id="stars1" fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
                <font>
                   <Font name="Arial" size="25.0" />
                </font>
@@ -129,7 +129,7 @@
                   <Image url="@../star.png" />
                </image>
             </ImageView>
-            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+            <Text fx:id="stars2" fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
                <font>
                   <Font name="Arial" size="25.0" />
                </font>
@@ -169,7 +169,7 @@
                   <Image url="@../star.png" />
                </image>
             </ImageView>
-            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+            <Text fx:id="stars3" fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
                <font>
                   <Font name="Arial" size="25.0" />
                </font>
@@ -209,7 +209,7 @@
                   <Image url="@../star.png" />
                </image>
             </ImageView>
-            <Text fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
+            <Text fx:id="stars4" fill="#f2ed6e" layoutX="66.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" textAlignment="CENTER" wrappingWidth="53.1168212890625">
                <font>
                   <Font name="Arial" size="25.0" />
                </font>

@@ -22,6 +22,14 @@ import java.util.ResourceBundle;
 
 public class ResumeMenu implements Initializable {
     @FXML
+    private Text stars1;
+    @FXML
+    private Text stars2;
+    @FXML
+    private Text stars3;
+    @FXML
+    private Text stars4;
+    @FXML
     private Text date1;
     @FXML
     private Text time1;
@@ -113,6 +121,7 @@ public class ResumeMenu implements Initializable {
         game1.setDisable(false);
         time1.setText(databaseFiles.get(0).getTime());
         date1.setText(databaseFiles.get(0).getDate());
+        stars1.setText(Integer.toString(databaseFiles.get(0).getStars_collected()));
     }
     private void showTwo(){
         showOne();
@@ -120,6 +129,7 @@ public class ResumeMenu implements Initializable {
         game2.setDisable(false);
         time2.setText(databaseFiles.get(1).getTime());
         date2.setText(databaseFiles.get(1).getDate());
+        stars2.setText(Integer.toString(databaseFiles.get(1).getStars_collected()));
     }
     private void showThree(){
         showTwo();
@@ -127,6 +137,7 @@ public class ResumeMenu implements Initializable {
         game3.setDisable(false);
         time3.setText(databaseFiles.get(2).getTime());
         date3.setText(databaseFiles.get(2).getDate());
+        stars3.setText(Integer.toString(databaseFiles.get(2).getStars_collected()));
     }
     private void showFour(){
         showThree();
@@ -134,6 +145,7 @@ public class ResumeMenu implements Initializable {
         game4.setDisable(false);
         time4.setText(databaseFiles.get(3).getTime());
         date4.setText(databaseFiles.get(3).getDate());
+        stars4.setText(Integer.toString(databaseFiles.get(3).getStars_collected()));
     }
     @FXML
     private void mainMenu(MouseEvent mouseEvent) throws IOException {
